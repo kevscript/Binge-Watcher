@@ -1,26 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import tmdbAPI from '../api/tmdb'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { fetchMovies } from '../actions'
 
-const App = () => {
+const App = ({ movies, fetchMovies }) => {
 
-  const [movie, setMovie] = useState({})
-
-  const getData = async (url, setData) => {
-    const res = await tmdbAPI.get(url)
-    setData(res.data)
-  }
 
   useEffect(() => {
-    getData('/movie/550', setMovie)
+    fetchMovies()
   }, [])
 
-  return (
-    <div>
-      <h1>hi from App</h1>
-      <h1>{movie.budget}</h1>
-
-    </div>
-  )
+  if (movies.loading) {
+    return <h1>Loading</h1>
+  } else if (movies.error) {
+    return <h1>{movies.error}</h1>
+  } else {
+    return (
+      <div>
+        <h1>hi from App</h1>
+        <h1>{movies.data.page}</h1>
+      </div>
+    )
+  }
 }
 
-export default App
+const mapStateToProps = (state) => ({
+  movies: state.movies
+})
+
+const mapDispatchToProps = {
+  fetchMovies
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
