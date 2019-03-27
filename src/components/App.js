@@ -4,20 +4,25 @@ import { fetchMovies } from '../actions'
 
 const App = ({ movies, fetchMovies }) => {
 
+  const { page, total_pages, results, total_results, error, loading } = movies
 
   useEffect(() => {
     fetchMovies()
   }, [])
 
-  if (movies.loading) {
+  if (loading) {
     return <h1>Loading</h1>
-  } else if (movies.error) {
-    return <h1>{movies.error}</h1>
+  } else if (error) {
+    return <h1>{error}</h1>
   } else {
     return (
       <div>
         <h1>hi from App</h1>
-        <h1>{movies.data.page}</h1>
+        <h3>page: {page}</h3>
+        <h3>total pages: {total_pages}</h3>
+        <h3>total results: {total_results}</h3>
+        <h3>name of movies from page:</h3>
+        {results.map(movie => <p>{movie.title}</p>)}
       </div>
     )
   }

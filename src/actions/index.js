@@ -9,7 +9,7 @@ export const fetchMoviesBegin = () => ({
 
 export const fetchMoviesSuccess = movies => ({
   type: FETCH_MOVIES_SUCCESS,
-  payload: movies
+  payload: { movies }
 })
 
 export const fetchMoviesError = error => ({

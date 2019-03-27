@@ -1,7 +1,10 @@
 import { FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_ERROR } from '../actions/types'
 
 const initialState = {
-  data: [],
+  page: 0,
+  total_results: 0,
+  total_pages: 0,
+  results: [],
   error: null,
   loading: false,
 }
@@ -18,7 +21,10 @@ export default (state = initialState, action) => {
     return {
       ...state,
       loading: false,
-      data: action.payload
+      results: action.payload.movies.results,
+      page: action.payload.movies.page,
+      total_results: action.payload.movies.total_results,
+      total_pages: action.payload.movies.total_pages
     }
 
   case FETCH_MOVIES_ERROR:
