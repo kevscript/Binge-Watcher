@@ -1,7 +1,7 @@
 import { FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_ERROR } from '../actions/types'
 
 const initialState = {
-  page: 0,
+  page: 1,
   total_results: 0,
   total_pages: 0,
   results: [],

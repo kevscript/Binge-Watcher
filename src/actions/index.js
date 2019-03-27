@@ -17,14 +17,15 @@ export const fetchMoviesError = error => ({
   payload: { error }
 })
 
-export const fetchMovies = () => {
+export const fetchMovies = (page = 1) => {
   return dispatch => {
     dispatch(fetchMoviesBegin())
 
     return tmdbAPI.get('/discover/movie', {
       params: {
         language: 'en-US',
-        sort_by: 'popularity.desc'
+        sort_by: 'popularity.desc',
+        page
       }
     }).then(({data}) => {
       dispatch(fetchMoviesSuccess(data))

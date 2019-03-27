@@ -17,6 +17,8 @@ const App = ({ movies, fetchMovies }) => {
   } else {
     return (
       <div>
+        <button onClick={() => page > 1 ? fetchMovies(page - 1): null}>prev page</button>
+        <button onClick={() => fetchMovies(page + 1)}>next page</button>
         <h1>hi from App</h1>
         <h3>page: {page}</h3>
         <h3>total pages: {total_pages}</h3>
