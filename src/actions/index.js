@@ -76,12 +76,20 @@ export const fetchMovies = (page = 1) => {
 }
 
 
-export const selectSort = (sort) => ({
-  type: SELECT_SORT,
-  payload: sort
-})
+export const selectSort = (sort) => dispatch => {
+  dispatch({
+    type: SELECT_SORT,
+    payload: sort 
+  })
 
-export const selectGenres = (genre) => ({
-  type: SELECT_GENRES,
-  payload: genre
-})
+  dispatch(fetchMovies())
+}
+
+export const selectGenres = (genre) => dispatch => {
+  dispatch({
+    type: SELECT_GENRES,
+    payload: genre
+  })
+
+  dispatch(fetchMovies())
+}

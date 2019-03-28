@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchGenres, selectSort, selectGenres, fetchMovies } from '../actions'
+import { fetchGenres, selectSort, selectGenres } from '../actions'
 
-const Sidebar = ({ fetchGenres, genres, selectGenres, selectSort, fetchMovies }) => {
+const Sidebar = ({ fetchGenres, genres, selectGenres, selectSort }) => {
 
   useEffect(() => {
     fetchGenres()
@@ -18,10 +18,6 @@ const Sidebar = ({ fetchGenres, genres, selectGenres, selectSort, fetchMovies })
     if (e.target.getAttribute('data-type') === 'genre') {
       selectGenres(e.target.getAttribute('data-query'))
     }
-  }
-
-  const handleSearchButton = () => {
-    fetchMovies()
   }
 
   return (
@@ -52,7 +48,6 @@ const Sidebar = ({ fetchGenres, genres, selectGenres, selectSort, fetchMovies })
           })}
         </ul>
       </div>
-      <button onClick={handleSearchButton}>Search</button>
     </div>
   )
 }
@@ -66,7 +61,6 @@ const mapDispatchToProps = {
   fetchGenres,
   selectSort,
   selectGenres,
-  fetchMovies
 }
 
 
