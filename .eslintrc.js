@@ -22,6 +22,7 @@ module.exports = {
   ],
   "rules": {
     "react/prop-types": 0,
+    "no-case-declarations": 0,
     "indent": [
       "error",
       2

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovies } from '../actions'
+import placeholder from '../assets/placeholder.png'
 
 const Movies = ({ movies, fetchMovies }) => {
 
@@ -29,7 +30,7 @@ const Movies = ({ movies, fetchMovies }) => {
             return (
               <div key={movie.id} style={{ width: '280px', borderRadius: '10px', margin: '15px', boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)' }}>
                 <div style={{ position: 'relative', height: 'calc(100% - 100px)', overflow: 'hidden', borderRadius: '10px 10px 0 0' }}>
-                  <img src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`} alt='movie poster' style={{ display: 'block', width: '100%', height: 'auto', margin: 'auto' }} />
+                  <img src={movie.poster_path !== null ? `http://image.tmdb.org/t/p/w342${movie.poster_path}` : placeholder} alt='movie poster' style={{ display: 'block', width: '100%', height: 'auto', margin: 'auto' }} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
                   <h3 style={{ textAlign: 'center', width: '80%', fontSize: '16px' }}>{movie.title}</h3>
