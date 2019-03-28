@@ -1,5 +1,11 @@
 import tmdbAPI from '../api/tmdb'
-import { FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_ERROR } from './types'
+import { 
+  FETCH_MOVIES_BEGIN, 
+  FETCH_MOVIES_SUCCESS, 
+  FETCH_MOVIES_ERROR, 
+  FETCH_GENRES, 
+  FETCH_GENRES_ERROR 
+} from './types'
 
 
 
@@ -27,11 +33,31 @@ export const fetchMovies = (page = 1) => {
         sort_by: 'popularity.desc',
         page
       }
-    }).then(({data}) => {
-      dispatch(fetchMoviesSuccess(data))
-      return data
+    }).then(res => {
+      dispatch({
+        type: FETCH_MOVIES_SUCCESS,
+        payload: res.data
+      })
     }).catch(error => {
-      dispatch(fetchMoviesError(error))
+      dispatch({
+        type: FETCH_MOVIES_ERROR,
+        payload: error.message
+      })
     })
   }
+}
+
+export const fetchGenres = () => dispatch => {
+  return tmdbAPI.get('/genre/movie/list')
+    .then(res => {
+      dispatch({
+        type: FETCH_GENRES,
+        payload: res.data.genres
+      })
+    }).catch(error => {
+      dispatch({
+        type: FETCH_GENRES_ERROR,
+        payload: error.message
+      })
+    })
 }
