@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchGenres, selectSort, selectGenres } from '../actions'
 
-const Sidebar = ({ fetchGenres, genres, selectGenres, selectSort }) => {
+const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
+
+  const { genres } = options
 
   useEffect(() => {
     fetchGenres()
@@ -33,13 +35,12 @@ const Sidebar = ({ fetchGenres, genres, selectGenres, selectSort }) => {
       <div>
         <h3>Genres</h3>
         <ul>
-          <li>All</li>
           {genres && Object.keys(genres).map(i => {
             return (
-              <li 
-                key={genres[i].id} 
-                data-query={genres[i].id} 
-                data-type='genre' 
+              <li style={genres[i].selected === true ? { color: 'red' } : { color: '#000' }}
+                key={genres[i].id}
+                data-query={genres[i].id}
+                data-type='genre'
                 onClick={handleGenresSelection}
               >
                 {genres[i].name}
@@ -53,8 +54,7 @@ const Sidebar = ({ fetchGenres, genres, selectGenres, selectSort }) => {
 }
 
 const mapStateToProps = state => ({
-  genres: state.genres,
-  select: state.select
+  options: state.options
 })
 
 const mapDispatchToProps = {

@@ -13,9 +13,12 @@ import {
 export const fetchGenres = () => dispatch => {
   return tmdbAPI.get('/genre/movie/list')
     .then(res => {
+      const data = res.data.genres.map(genre => {
+        return genre = { ...genre, selected: false}
+      })
       dispatch({
         type: FETCH_GENRES,
-        payload: res.data.genres
+        payload: data
       })
     }).catch(error => {
       dispatch({
@@ -44,12 +47,16 @@ export const fetchMovies = (page = 1) => {
   return (dispatch, getState) => {
     dispatch(fetchMoviesBegin())
     let params = {}
-    const sort = getState().select.sort
-    const genres = getState().select.genres
+    const sort = getState().options.sort
+    const genres = getState().options.genres
 
-    if (genres.length > 0) {
+    const selectedGenres = genres
+      .filter(genre => genre.selected === true)
+      .map(el => el.id)
+
+    if (selectedGenres.length > 0 && !selectedGenres.includes(9999)) {
       params = {
-        with_genres: genres.join(','),
+        with_genres: selectedGenres.join(','),
         sort_by: sort,
         page: page
       }
@@ -85,10 +92,10 @@ export const selectSort = (sort) => dispatch => {
   dispatch(fetchMovies())
 }
 
-export const selectGenres = (genre) => dispatch => {
+export const selectGenres = (genreId) => dispatch => {
   dispatch({
     type: SELECT_GENRES,
-    payload: genre
+    payload: genreId
   })
 
   dispatch(fetchMovies())

@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
 import moviesReducer from './moviesReducer'
-import genresReducer from './genresReducer'
-import selectReducer from './selectReducer'
+import optionsReducer from './optionsReducer'
 
 export default combineReducers({ 
   movies: moviesReducer,
-  genres: genresReducer,
-  select: selectReducer
+  options: optionsReducer,
 })
