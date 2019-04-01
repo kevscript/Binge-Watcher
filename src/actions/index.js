@@ -47,8 +47,10 @@ export const fetchMovies = (page = 1) => {
   return (dispatch, getState) => {
     dispatch(fetchMoviesBegin())
     let params = {}
-    const sort = getState().options.sort
+    const sort = getState().options.sortBy
     const genres = getState().options.genres
+
+    const selectedSort = sort.find(el => el.selected === true)
 
     const selectedGenres = genres
       .filter(genre => genre.selected === true)
@@ -57,12 +59,12 @@ export const fetchMovies = (page = 1) => {
     if (selectedGenres.length > 0 && !selectedGenres.includes(9999)) {
       params = {
         with_genres: selectedGenres.join(','),
-        sort_by: sort,
+        sort_by: selectedSort.query,
         page: page
       }
     } else {
       params = {
-        sort_by: sort,
+        sort_by: selectedSort.query,
         page: page
       }
     }
@@ -83,10 +85,10 @@ export const fetchMovies = (page = 1) => {
 }
 
 
-export const selectSort = (sort) => dispatch => {
+export const selectSort = (sortQuery) => dispatch => {
   dispatch({
     type: SELECT_SORT,
-    payload: sort 
+    payload: sortQuery
   })
 
   dispatch(fetchMovies())

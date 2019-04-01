@@ -4,7 +4,7 @@ import { fetchGenres, selectSort, selectGenres } from '../actions'
 
 const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
 
-  const { genres } = options
+  const { genres, sortBy } = options
 
   useEffect(() => {
     fetchGenres()
@@ -27,9 +27,19 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
       <div>
         <h3>Sort By</h3>
         <ul>
-          <li data-query='popularity.desc' data-type='sort' onClick={handleSortSelection}>Most Popular</li>
-          <li data-query='vote_average.desc' data-type='sort' onClick={handleSortSelection}>Top Rated</li>
-          <li data-query='release_date.desc' data-type='sort' onClick={handleSortSelection}>Release Date</li>
+          {sortBy && sortBy.map(el => {
+            return (
+              <li
+                key={el.query}
+                data-query={el.query}
+                data-type='sort'
+                onClick={handleSortSelection}
+                style={el.selected ? {color: 'red'} : {color: '#000'}}
+              >
+                {el.name}
+              </li>
+            )
+          })}
         </ul>
       </div>
       <div>

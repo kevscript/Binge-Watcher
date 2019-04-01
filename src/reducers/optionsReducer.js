@@ -5,6 +5,23 @@ const initialState = {
     {id: 9999, name: 'All Movies', selected: true}
   ],
   sort: 'popularity.desc',
+  sortBy: [
+    {
+      name: 'Popularity',
+      query: 'popularity.desc',
+      selected: true
+    },
+    {
+      name: 'Ratings',
+      query: 'vote_average.desc',
+      selected: false
+    },
+    {
+      name: 'Release',
+      query: 'release_date.desc',
+      selected: false
+    }
+  ]
 }
 
 export default (state = initialState, action) => {
@@ -21,9 +38,30 @@ export default (state = initialState, action) => {
     }
 
   case SELECT_SORT:
+    let matchingSort = state.sortBy.find(el => el.query === action.payload)
+    let selectedSort = state.sortBy.find(el => el.selected === true)
+    let restOfSorts = state.sortBy.filter(el => el.query !== action.payload)
+
+    if (matchingSort.query === selectedSort.query) {
+      return state
+    } else if (matchingSort.selected === false) {
+      restOfSorts = restOfSorts.map(el => {
+        return {
+          ...el,
+          selected: false
+        }
+      })
+      matchingSort.selected = true
+    }
+
+    let newSort = [...restOfSorts, matchingSort]
+      .sort((a, b) => {
+        return a.name > b.name ? 1 : -1
+      })
+
     return {
       ...state,
-      sort: action.payload
+      sortBy: [...newSort]
     }
 
   case SELECT_GENRES:
@@ -34,14 +72,12 @@ export default (state = initialState, action) => {
     if (matchingGenre.id === allGenres.id && matchingGenre.selected === true) {
       return state
     } else if (matchingGenre.id === allGenres.id && matchingGenre.selected === false) {
-      console.log(genresWithoutMatching)
       genresWithoutMatching = genresWithoutMatching.map(el => {
         return {
           ...el,
           selected: false
         }
       })
-      console.log(genresWithoutMatching)
       matchingGenre.selected = true
     } else if (matchingGenre.id !== allGenres.id && matchingGenre.selected === true) {
       allGenres.selected = true
