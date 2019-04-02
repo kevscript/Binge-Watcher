@@ -2,9 +2,8 @@ import { FETCH_GENRES, FETCH_GENRES_ERROR, SELECT_GENRES, SELECT_SORT } from '..
 
 const initialState = {
   genres: [
-    {id: 9999, name: 'All Movies', selected: true}
+    { id: 9999, name: 'All Movies', selected: true }
   ],
-  sort: 'popularity.desc',
   sortBy: [
     {
       name: 'Popularity',

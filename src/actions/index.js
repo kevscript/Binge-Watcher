@@ -6,7 +6,10 @@ import {
   FETCH_GENRES,
   FETCH_GENRES_ERROR,
   SELECT_GENRES,
-  SELECT_SORT
+  SELECT_SORT,
+  FETCH_MOVIE_BEGIN,
+  FETCH_MOVIE_SUCCESS,
+  FETCH_MOVIE_ERROR,
 } from './types'
 
 // fetching static genre infos
@@ -14,7 +17,7 @@ export const fetchGenres = () => dispatch => {
   return tmdbAPI.get('/genre/movie/list')
     .then(res => {
       const data = res.data.genres.map(genre => {
-        return genre = { ...genre, selected: false}
+        return genre = { ...genre, selected: false }
       })
       dispatch({
         type: FETCH_GENRES,
@@ -33,15 +36,6 @@ export const fetchMoviesBegin = () => ({
   type: FETCH_MOVIES_BEGIN
 })
 
-export const fetchMoviesSuccess = movies => ({
-  type: FETCH_MOVIES_SUCCESS,
-  payload: { movies }
-})
-
-export const fetchMoviesError = error => ({
-  type: FETCH_MOVIES_ERROR,
-  payload: { error }
-})
 
 export const fetchMovies = (page = 1) => {
   return (dispatch, getState) => {
@@ -85,7 +79,7 @@ export const fetchMovies = (page = 1) => {
 }
 
 
-export const selectSort = (sortQuery) => dispatch => {
+export const selectSort = sortQuery => dispatch => {
   dispatch({
     type: SELECT_SORT,
     payload: sortQuery
@@ -94,11 +88,39 @@ export const selectSort = (sortQuery) => dispatch => {
   dispatch(fetchMovies())
 }
 
-export const selectGenres = (genreId) => dispatch => {
+export const selectGenres = genreId => dispatch => {
   dispatch({
     type: SELECT_GENRES,
     payload: genreId
   })
 
   dispatch(fetchMovies())
+}
+
+export const fetchMovieBegin = () => ({
+  type: FETCH_MOVIE_BEGIN
+})
+
+export const fetchMovie = (movieId) => {
+  return async (dispatch) => {
+    dispatch(fetchMovieBegin())
+    const infoPromise = await tmdbAPI.get(`/movie/${movieId}`)
+    const castPromise = await tmdbAPI.get(`/movie/${movieId}/credits`)
+    await Promise.all([infoPromise, castPromise])
+      .then(([info, cast]) => {
+        dispatch({
+          type: FETCH_MOVIE_SUCCESS,
+          payload: { 
+            info: info.data, 
+            cast: cast.data
+          }
+        })
+      })
+      .catch(error => {
+        dispatch({
+          type: FETCH_MOVIE_ERROR,
+          payload: error.message
+        })
+      })
+  }
 }

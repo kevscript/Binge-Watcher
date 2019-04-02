@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import Movies from './Movies'
+import Movie from './Movie'
 import Sidebar from './Sidebar'
 
 
@@ -16,7 +17,8 @@ const App = () => {
           <Route exact path='/' render={() => (
             <Redirect from='/' to='/movies' />
           )} />
-          <Route path='/movies' render={() => <Movies />} />
+          <Route exact path='/movies' component={Movies} />
+          <Route path='/movies/:id' component={Movie} />
         </Switch>
       </div>
     </div>
