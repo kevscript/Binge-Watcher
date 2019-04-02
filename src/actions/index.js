@@ -101,26 +101,26 @@ export const fetchMovieBegin = () => ({
   type: FETCH_MOVIE_BEGIN
 })
 
+export const fetchMovieSuccess = (info, cast) => ({
+  type: FETCH_MOVIE_SUCCESS,
+  payload: {
+    infor: info.data,
+    cast: cast.data
+  }
+})
+
+export const fetchMovieError = (error) => ({
+  type: FETCH_MOVIE_ERROR,
+  payload: error.message
+})
+
 export const fetchMovie = (movieId) => {
   return async (dispatch) => {
     dispatch(fetchMovieBegin())
     const infoPromise = await tmdbAPI.get(`/movie/${movieId}`)
     const castPromise = await tmdbAPI.get(`/movie/${movieId}/credits`)
     await Promise.all([infoPromise, castPromise])
-      .then(([info, cast]) => {
-        dispatch({
-          type: FETCH_MOVIE_SUCCESS,
-          payload: { 
-            info: info.data, 
-            cast: cast.data
-          }
-        })
-      })
-      .catch(error => {
-        dispatch({
-          type: FETCH_MOVIE_ERROR,
-          payload: error.message
-        })
-      })
+      .then(([info, cast]) => dispatch(fetchMovieSuccess(info, cast)))
+      .catch(error => dispatch(fetchMovieError(error)))
   }
 }
