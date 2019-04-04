@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchGenres, selectSort, selectGenres } from '../actions'
 
@@ -26,10 +27,11 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
     <div>
       <div>
         <h3>Sort By</h3>
-        <ul>
+        <ul style={{display: 'flex', flexDirection: 'column'}}>
           {sortBy && sortBy.map(el => {
             return (
-              <li
+              <Link
+                to='/movies'
                 key={el.query}
                 data-query={el.query}
                 data-type='sort'
@@ -37,24 +39,26 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
                 style={el.selected ? {color: 'red'} : {color: '#000'}}
               >
                 {el.name}
-              </li>
+              </Link>
             )
           })}
         </ul>
       </div>
       <div>
         <h3>Genres</h3>
-        <ul>
+        <ul style={{display: 'flex', flexDirection: 'column'}}>
           {genres && Object.keys(genres).map(i => {
             return (
-              <li style={genres[i].selected === true ? { color: 'red' } : { color: '#000' }}
+              <Link 
+                to='/movies'
+                style={genres[i].selected === true ? { color: 'red' } : { color: '#000' }}
                 key={genres[i].id}
                 data-query={genres[i].id}
                 data-type='genre'
                 onClick={handleGenresSelection}
               >
                 {genres[i].name}
-              </li>
+              </Link>
             )
           })}
         </ul>

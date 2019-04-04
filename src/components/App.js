@@ -8,7 +8,7 @@ import Sidebar from './Sidebar'
 const App = () => {
   return (
     <div style={{display: 'flex', width: '100%'}}>
-      <div style={{width: '10%'}}>
+      <div style={{width: '250px'}}>
         <Sidebar />
       </div>
 

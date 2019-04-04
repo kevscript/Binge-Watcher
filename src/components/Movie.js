@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovie } from '../actions'
+import placeholder from '../assets/placeholder.png'
+import { hidden } from 'ansi-colors';
 
 const Movie = ({ movie, fetchMovie, match }) => {
+  const { info, people } = movie
+
   useEffect(() => {
     fetchMovie(match.params.id)
   }, [])
@@ -14,8 +18,19 @@ const Movie = ({ movie, fetchMovie, match }) => {
   } else {
     return (
       <div>
-        <h1>title: {movie.info.original_title}</h1>
-        <h1>budget: {movie.info.budget} $</h1>
+        <h1>title: {info.original_title}</h1>
+        <h1>budget: {info.budget} $</h1>
+        <ul style={{display: 'flex', flexWrap: 'wrap'}}>
+          {people.cast && people.cast.map(x => {
+            return (
+              <li key={`cast_${x.id}`}>
+                <div style={{ position: 'relative', width: '45px', height: '45px', overflow: 'hidden', borderRadius: '50%' }}>
+                  <img src={x.profile_path !== null ? `http://image.tmdb.org/t/p/w185${x.profile_path}` : placeholder} alt='' style={{ display: 'block', width: '45px', height: 'auto' }} />
+                </div>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     )
   }
