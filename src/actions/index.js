@@ -104,7 +104,7 @@ export const fetchMovieBegin = () => ({
 export const fetchMovieSuccess = (info, cast) => ({
   type: FETCH_MOVIE_SUCCESS,
   payload: {
-    infor: info.data,
+    info: info.data,
     cast: cast.data
   }
 })
@@ -114,6 +114,7 @@ export const fetchMovieError = (error) => ({
   payload: error.message
 })
 
+// main action
 export const fetchMovie = (movieId) => {
   return async (dispatch) => {
     dispatch(fetchMovieBegin())

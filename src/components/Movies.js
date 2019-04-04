@@ -1,21 +1,16 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchMovies, fetchMovie } from '../actions'
+import { fetchMovies } from '../actions'
 import placeholder from '../assets/placeholder.png'
 
-const Movies = ({ movies, fetchMovies, fetchMovie }) => {
+const Movies = ({ movies, fetchMovies }) => {
 
   const { page, total_pages, results, total_results, error, loading } = movies
 
   useEffect(() => {
     fetchMovies()
   }, [])
-
-  const handleMovieClick = (e) => {
-    const movieId = e.currentTarget.getAttribute('data-id')
-    fetchMovie(movieId)
-  }
 
   if (loading === true) {
     return <h1>Loading</h1>
@@ -39,7 +34,6 @@ const Movies = ({ movies, fetchMovies, fetchMovie }) => {
                 key={movie.id} 
                 data-id={movie.id} 
                 style={{ width: '280px', borderRadius: '10px', margin: '15px', boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)' }}
-                onClick={handleMovieClick}
               >
                 <div style={{ position: 'relative', height: 'calc(100% - 100px)', overflow: 'hidden', borderRadius: '10px 10px 0 0' }}>
                   <img src={movie.poster_path !== null ? `http://image.tmdb.org/t/p/w342${movie.poster_path}` : placeholder} alt='movie poster' style={{ display: 'block', width: '100%', height: 'auto', margin: 'auto' }} />
@@ -63,8 +57,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  fetchMovies,
-  fetchMovie
+  fetchMovies
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies)

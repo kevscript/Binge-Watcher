@@ -1,6 +1,6 @@
 import { FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_ERROR } from '../actions/types'
 
-export default (state = { loading: false }, action) => {
+export default (state = { loading: true }, action) => {
   switch (action.type) {
   case FETCH_MOVIES_BEGIN:
     return {
