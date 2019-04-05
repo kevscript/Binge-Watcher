@@ -79,7 +79,6 @@ export default (state = initialState, action) => {
       })
       matchingGenre.selected = true
     } else if (matchingGenre.id !== allGenres.id && matchingGenre.selected === true) {
-      allGenres.selected = true
       matchingGenre.selected = false
     } else if (matchingGenre.id !== allGenres.id && matchingGenre.selected === false) {
       allGenres.selected = false

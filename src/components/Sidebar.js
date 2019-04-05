@@ -2,6 +2,36 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchGenres, selectSort, selectGenres } from '../actions'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+`
+
+const ListContainer = styled.div`
+  margin-top: 30px;
+`
+
+const OptionTitle = styled.h3`
+  text-transform: uppercase;
+  line-height: 3;
+  color: blue;
+`
+
+const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+`
+
+const ListItem = styled(Link)`
+  text-decoration: none;
+  color: #333;
+  font-weight: ${props => props.selected ? 800 : 400};
+  line-height: 2;
+`
 
 const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
 
@@ -24,46 +54,46 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
   }
 
   return (
-    <div>
-      <div>
-        <h3>Sort By</h3>
-        <ul style={{display: 'flex', flexDirection: 'column'}}>
+    <Container>
+      <ListContainer>
+        <OptionTitle>Sort By</OptionTitle>
+        <List>
           {sortBy && sortBy.map(el => {
             return (
-              <Link
+              <ListItem
                 to='/movies'
                 key={el.query}
                 data-query={el.query}
                 data-type='sort'
                 onClick={handleSortSelection}
-                style={el.selected ? {color: 'red'} : {color: '#000'}}
+                selected={el.selected}
               >
                 {el.name}
-              </Link>
+              </ListItem>
             )
           })}
-        </ul>
-      </div>
-      <div>
-        <h3>Genres</h3>
-        <ul style={{display: 'flex', flexDirection: 'column'}}>
+        </List>
+      </ListContainer>
+      <ListContainer>
+        <OptionTitle>Genres</OptionTitle>
+        <List>
           {genres && Object.keys(genres).map(i => {
             return (
-              <Link 
+              <ListItem 
                 to='/movies'
-                style={genres[i].selected === true ? { color: 'red' } : { color: '#000' }}
+                selected={genres[i].selected}
                 key={genres[i].id}
                 data-query={genres[i].id}
                 data-type='genre'
                 onClick={handleGenresSelection}
               >
                 {genres[i].name}
-              </Link>
+              </ListItem>
             )
           })}
-        </ul>
-      </div>
-    </div>
+        </List>
+      </ListContainer>
+    </Container>
   )
 }
 

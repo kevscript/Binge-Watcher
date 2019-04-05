@@ -1,18 +1,33 @@
 import React from 'react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import styled from 'styled-components'
 import Movies from './Movies'
 import Movie from './Movie'
 import Sidebar from './Sidebar'
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+`
+
+const SidebarContainer = styled.div`
+  width: 200px;
+  padding-left: 20px;
+  overflow-y: scroll;
+`
+
+const MainContainer = styled.div`
+  overflow-y: scroll;
+`
 
 const App = () => {
   return (
-    <div style={{display: 'flex', width: '100%'}}>
-      <div style={{width: '250px'}}>
+    <Container>
+      <SidebarContainer>
         <Sidebar />
-      </div>
-
-      <div style={{width: '90%'}}>
+      </SidebarContainer>
+      <MainContainer>
         <Switch>
           <Route exact path='/' render={() => (
             <Redirect from='/' to='/movies' />
@@ -20,8 +35,8 @@ const App = () => {
           <Route exact path='/movies' component={Movies} />
           <Route path='/movies/:id' component={Movie} />
         </Switch>
-      </div>
-    </div>
+      </MainContainer>
+    </Container>
   )
 }
 

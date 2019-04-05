@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovie } from '../actions'
 import placeholder from '../assets/placeholder.png'
-import { hidden } from 'ansi-colors';
 
 const Movie = ({ movie, fetchMovie, match }) => {
   const { info, people } = movie
