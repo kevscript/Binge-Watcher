@@ -24,11 +24,17 @@ const List = styled.ul`
   flex-direction: column;
 `
 
-const ListItem = styled(Link)`
+const ListLink = styled(Link)`
   text-decoration: none;
+  line-height: 2.5;
   color: #333;
+`
+
+const ListItemText = styled.span`
   font-weight: ${props => props.selected ? 800 : 400};
-  line-height: 2;
+  border: ${props => props.selected ? '2px solid #f4f4f4' : '2px solid transparent'};
+  border-radius: 15px;
+  padding: 5px 10px;
 `
 
 const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
@@ -58,16 +64,19 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
         <List>
           {sortBy && sortBy.map(el => {
             return (
-              <ListItem
+              <ListLink
                 to='/movies'
                 key={el.query}
-                data-query={el.query}
-                data-type='sort'
-                onClick={handleSortSelection}
-                selected={el.selected}
               >
-                {el.name}
-              </ListItem>
+                <ListItemText 
+                  selected={el.selected} 
+                  onClick={handleSortSelection} 
+                  data-query={el.query}
+                  data-type='sort'
+                >
+                  {el.name}
+                </ListItemText>
+              </ListLink>
             )
           })}
         </List>
@@ -77,16 +86,19 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
         <List>
           {genres && Object.keys(genres).map(i => {
             return (
-              <ListItem 
+              <ListLink 
                 to='/movies'
-                selected={genres[i].selected}
                 key={genres[i].id}
-                data-query={genres[i].id}
-                data-type='genre'
-                onClick={handleGenresSelection}
               >
-                {genres[i].name}
-              </ListItem>
+                <ListItemText 
+                  selected={genres[i].selected}
+                  data-query={genres[i].id}
+                  data-type='genre'
+                  onClick={handleGenresSelection}
+                >
+                  {genres[i].name}
+                </ListItemText>
+              </ListLink>
             )
           })}
         </List>

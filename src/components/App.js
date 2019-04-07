@@ -10,17 +10,17 @@ const Container = styled.div`
 `
 
 const SidebarContainer = styled.div`
-  padding-left: 20px;
+  padding-left: 50px;
   height: 100vh;
   overflow-y: scroll;
-  width: 200px;
+  width: 300px;
   overflow-x: hidden;
   position: fixed;
 `
 
 const MainContainer = styled.div`
-  width: calc(100% - 200px);
-  margin-left: 200px;
+  width: calc(100% - 300px);
+  margin-left: 300px;
 `
 
 const App = () => {

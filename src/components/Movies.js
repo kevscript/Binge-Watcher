@@ -3,6 +3,93 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchMovies } from '../actions'
 import placeholder from '../assets/placeholder.png'
+import styled from 'styled-components'
+
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  height: 80px;
+`
+
+const Pagination = styled.span`
+
+`
+
+const PrimaryButton = styled.button`
+  cursor: pointer;
+  display: block;
+  padding: 8px 20px;
+  border: 1px solid #f4f4f4;
+  border-radius: 15px;
+  background-color: transparent;
+  font-family: 'Source Sans Pro';
+  transition: 0.3s;
+
+  :disabled {
+    opacity: 0.5;
+    color: transparent;
+  }
+
+  :hover:enabled {
+    border: 1px solid #666;
+  }
+`
+
+const MoviesListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+`
+
+const MoviesListItem = styled.div`
+  width: 250px;
+  border-radius: 10px; 
+  margin: 25px;
+  transition: 0.3s;
+
+  :hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 3px 3px rgba(0,0,0,0.23);
+  }
+`
+
+const MovieLink = styled(Link)`
+  text-decoration: none;
+  color: #333;
+`
+
+const MoviePosterContainer = styled.div`
+  position: relative; 
+  height: calc(100% - 80px); 
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+`
+
+const MoviePoster = styled.img`
+  display: block; 
+  width: 100%; 
+  height: auto; 
+  margin: auto;
+`
+
+const MovieSubContainer = styled.div`
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  height: 80px;
+`
+
+const MovieSubTitle = styled.div`
+  text-align: center; 
+  width: 80%;
+  font-size: 18px;
+`
 
 const Movies = ({ movies, fetchMovies }) => {
 
@@ -19,34 +106,55 @@ const Movies = ({ movies, fetchMovies }) => {
   } else {
     return (
       <div>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <h3>page: {page}</h3>
-          <h3>total pages: {total_pages}</h3>
-          <h3>total results: {total_results}</h3>
-          <button onClick={() => page > 1 ? fetchMovies(page - 1) : null}>prev page</button>
-          <button onClick={() => fetchMovies(page + 1)}>next page</button>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '100%', margin: '0 auto' }}>
+        <PaginationContainer>
+          <PrimaryButton 
+            onClick={() => fetchMovies(page - 1)}
+            disabled={page === 1 ? true : false}
+          >
+            {`page ${page - 1}`}
+          </PrimaryButton>
+          <Pagination>{page} / {total_pages}</Pagination>
+          <PrimaryButton 
+            onClick={() => fetchMovies(page + 1)}
+            disabled={page === total_pages ? true : false}
+          >
+            {`page ${page + 1}`}
+          </PrimaryButton>
+        </PaginationContainer>
+        <MoviesListContainer>
           {results && results.map(movie => {
             return (
-              <Link 
-                to={`/movies/${movie.id}`} 
-                key={movie.id} 
-                data-id={movie.id} 
-                style={{ width: '280px', borderRadius: '10px', margin: '15px', boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)' }}
-              >
-                <div style={{ position: 'relative', height: 'calc(100% - 100px)', overflow: 'hidden', borderRadius: '10px 10px 0 0' }}>
-                  <img src={movie.poster_path !== null ? `http://image.tmdb.org/t/p/w342${movie.poster_path}` : placeholder} alt='movie poster' style={{ display: 'block', width: '100%', height: 'auto', margin: 'auto' }} />
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
-                  <h3 style={{ textAlign: 'center', width: '80%', fontSize: '16px' }}>{movie.title}</h3>
-                  <p>rating: {movie.vote_average}</p>
-                  <p>{movie.release_date}</p>
-                </div>
-              </Link>
+              <MoviesListItem key={movie.id}>
+                <MovieLink 
+                  to={`/movies/${movie.id}`}  
+                  data-id={movie.id} 
+                >
+                  <MoviePosterContainer>
+                    <MoviePoster src={movie.poster_path !== null ? `http://image.tmdb.org/t/p/w342${movie.poster_path}` : placeholder} alt='movie poster' />
+                  </MoviePosterContainer>
+                  <MovieSubContainer>
+                    <MovieSubTitle>{movie.title}</MovieSubTitle>
+                  </MovieSubContainer>
+                </MovieLink>
+              </MoviesListItem>
             )
           })}
-        </div>
+          <PaginationContainer>
+            <PrimaryButton 
+              onClick={() => fetchMovies(page - 1)}
+              disabled={page === 1 ? true : false}
+            >
+              {`page ${page - 1}`}
+            </PrimaryButton>
+            <Pagination>{page} / {total_pages}</Pagination>
+            <PrimaryButton 
+              onClick={() => fetchMovies(page + 1)}
+              disabled={page === total_pages ? true : false}
+            >
+              {`page ${page + 1}`}
+            </PrimaryButton>
+          </PaginationContainer>
+        </MoviesListContainer>
       </div>
     )
   }
