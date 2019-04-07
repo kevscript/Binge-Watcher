@@ -25,7 +25,7 @@ const PrimaryButton = styled.button`
   border: 1px solid #f4f4f4;
   border-radius: 15px;
   background-color: transparent;
-  font-family: 'Source Sans Pro';
+  font-family: 'Source Sans Pro', 'Roboto', sans-serif;
   transition: 0.3s;
 
   :disabled {
@@ -34,7 +34,7 @@ const PrimaryButton = styled.button`
   }
 
   :hover:enabled {
-    border: 1px solid #666;
+    border: 1px solid rgba(0,0,0,0.2);
   }
 `
 
@@ -93,7 +93,7 @@ const MovieSubTitle = styled.div`
 
 const Movies = ({ movies, fetchMovies }) => {
 
-  const { page, total_pages, results, total_results, error, loading } = movies
+  const { page, total_pages, results, error, loading } = movies
 
   useEffect(() => {
     fetchMovies()

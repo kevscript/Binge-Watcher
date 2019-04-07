@@ -30,11 +30,21 @@ const ListLink = styled(Link)`
   color: #333;
 `
 
-const ListItemText = styled.span`
-  font-weight: ${props => props.selected ? 800 : 400};
-  border: ${props => props.selected ? '2px solid #f4f4f4' : '2px solid transparent'};
+const ListItemText = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 150px;
+  height: 30px;
+  font-weight: ${props => props.selected ? 600 : 400};
+  border: ${props => props.selected ? '1px solid rgba(0,0,0,0.2)' : '1px solid transparent'};
   border-radius: 15px;
   padding: 5px 10px;
+  margin-bottom: 5px;
+
+  :hover {
+    border: ${props => props.selected ? '1px solid rgba(0,0,0,0.2)' : '1px solid #eee'};
+  }
 `
 
 const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
