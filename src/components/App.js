@@ -7,18 +7,20 @@ import Sidebar from './Sidebar'
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  height: 100vh;
 `
 
 const SidebarContainer = styled.div`
-  width: 200px;
   padding-left: 20px;
+  height: 100vh;
   overflow-y: scroll;
+  width: 200px;
+  overflow-x: hidden;
+  position: fixed;
 `
 
 const MainContainer = styled.div`
-  overflow-y: scroll;
+  width: calc(100% - 200px);
+  margin-left: 200px;
 `
 
 const App = () => {
