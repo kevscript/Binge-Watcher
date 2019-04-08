@@ -2,6 +2,16 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovie } from '../actions'
 import placeholder from '../assets/placeholder.png'
+import { ImpulseSpinner } from 'react-spinners-kit'
+import styled from 'styled-components'
+
+const SpinnerContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const Movie = ({ movie, fetchMovie, match }) => {
   const { info, people } = movie
@@ -11,7 +21,11 @@ const Movie = ({ movie, fetchMovie, match }) => {
   }, [])
 
   if (movie.loading === true) {
-    return <h1>Loading</h1>
+    return (
+      <SpinnerContainer>
+        <ImpulseSpinner size={100} color='blue' loading={movie.loading} />
+      </SpinnerContainer>
+    )
   } else {
     return (
       <div>

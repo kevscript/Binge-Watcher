@@ -4,6 +4,15 @@ import { connect } from 'react-redux'
 import { fetchMovies } from '../actions'
 import placeholder from '../assets/placeholder.png'
 import styled from 'styled-components'
+import { ImpulseSpinner } from 'react-spinners-kit'
+
+const SpinnerContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -100,7 +109,11 @@ const Movies = ({ movies, fetchMovies }) => {
   }, [])
 
   if (loading === true) {
-    return <h1>Loading</h1>
+    return (
+      <SpinnerContainer>
+        <ImpulseSpinner size={100} color='blue' loading={loading} />
+      </SpinnerContainer>
+    )
   } else if (error) {
     return <h1>{error}</h1>
   } else {
