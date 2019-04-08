@@ -3,6 +3,7 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import Movies from './Movies'
 import Movie from './Movie'
+import Profile from './Profile'
 import Sidebar from './Sidebar'
 
 const Container = styled.div`
@@ -36,6 +37,7 @@ const App = () => {
           )} />
           <Route exact path='/movies' component={Movies} />
           <Route path='/movies/:id' component={Movie} />
+          <Route path='/profile/:id' component={Profile} />
         </Switch>
       </MainContainer>
     </Container>

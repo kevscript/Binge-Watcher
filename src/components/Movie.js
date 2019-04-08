@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovie } from '../actions'
+import { Link } from 'react-router-dom'
 import placeholder from '../assets/placeholder.png'
 import { ImpulseSpinner } from 'react-spinners-kit'
 import styled from 'styled-components'
@@ -13,7 +14,7 @@ const SpinnerContainer = styled.div`
   align-items: center;
 `
 
-const AvatarContainer = styled.div`
+const AvatarLink = styled(Link)`
   position: relative;
   width: 45px;
   height: 45px; 
@@ -47,7 +48,7 @@ const Movie = ({ movie, fetchMovie, match }) => {
     return (
       <div>
         <div>
-          <img src={info.poster_path ? `http://image.tmdb.org/t/p/w185${info.poster_path}` : placeholder} alt='poster'/>
+          <img src={info.poster_path ? `http://image.tmdb.org/t/p/w185${info.poster_path}` : placeholder} alt='poster' />
         </div>
         <div>
           <h1>{info.title}</h1>
@@ -64,9 +65,9 @@ const Movie = ({ movie, fetchMovie, match }) => {
             {people.cast && people.cast.map(x => {
               return (
                 <li key={`cast_${x.id}`}>
-                  <AvatarContainer>
+                  <AvatarLink to={`/profile/${x.id}`} data-id={x.id}>
                     <AvatarImg src={x.profile_path ? `http://image.tmdb.org/t/p/w185${x.profile_path}` : placeholder} alt='' />
-                  </AvatarContainer>
+                  </AvatarLink>
                 </li>
               )
             })}

@@ -10,9 +10,17 @@ import {
   FETCH_MOVIE_BEGIN,
   FETCH_MOVIE_SUCCESS,
   FETCH_MOVIE_ERROR,
+  FETCH_PROFILE_BEGIN,
+  FETCH_PROFILE_SUCCESS,
+  FETCH_PROFILE_ERROR
 } from './types'
 
-// fetching static genre infos
+
+
+
+
+// FETCH ALL GENRES FROM DB
+
 export const fetchGenres = () => dispatch => {
   return tmdbAPI.get('/genre/movie/list')
     .then(res => {
@@ -31,7 +39,14 @@ export const fetchGenres = () => dispatch => {
     })
 }
 
-// fetching movies
+
+
+
+
+
+
+// FETCH ALL MOVIES WITH SELECTED OPTIONS
+
 export const fetchMoviesBegin = () => ({
   type: FETCH_MOVIES_BEGIN
 })
@@ -97,6 +112,16 @@ export const selectGenres = genreId => dispatch => {
   dispatch(fetchMovies())
 }
 
+
+
+
+
+
+
+
+
+// FETCHING MOVIE BY ID
+
 export const fetchMovieBegin = () => ({
   type: FETCH_MOVIE_BEGIN
 })
@@ -115,7 +140,6 @@ export const fetchMovieError = (error) => ({
   payload: error.message
 })
 
-// main action
 export const fetchMovie = (movieId) => {
   return async (dispatch) => {
     dispatch(fetchMovieBegin())
@@ -125,5 +149,36 @@ export const fetchMovie = (movieId) => {
     await Promise.all([infoPromise, peoplePromise, recommendPromise])
       .then(([info, people, recommend]) => dispatch(fetchMovieSuccess(info, people, recommend)))
       .catch(error => dispatch(fetchMovieError(error)))
+  }
+}
+
+
+
+
+
+
+// FETCHING PROFILE OF SPECIFIC CAST MEMBER
+
+export const fetchProfileBegin = () => ({
+  type: FETCH_PROFILE_BEGIN
+})
+
+export const fetchProfileSuccess = (profile) => ({
+  type: FETCH_PROFILE_SUCCESS,
+  payload: profile.data
+})
+
+export const fetchProfileError = (error) => ({
+  type: FETCH_PROFILE_ERROR,
+  payload: error.message
+})
+
+export const fetchProfile = (profileId) => {
+  return async (dispatch) => {
+    dispatch(fetchProfileBegin())
+    const profilePromise = await tmdbAPI.get(`/person/${profileId}`)
+    await Promise.all([profilePromise])
+      .then(([profile]) => dispatch(fetchProfileSuccess(profile)))
+      .catch(error => dispatch(fetchProfileError(error)))
   }
 }
