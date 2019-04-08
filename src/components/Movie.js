@@ -13,8 +13,25 @@ const SpinnerContainer = styled.div`
   align-items: center;
 `
 
+const AvatarContainer = styled.div`
+  position: relative;
+  width: 45px;
+  height: 45px; 
+  overflow: hidden; 
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const AvatarImg = styled.img`
+  display: block; 
+  width: 45px; 
+  height: auto;
+`
+
 const Movie = ({ movie, fetchMovie, match }) => {
-  const { info, people } = movie
+  const { info, people, recommend } = movie
 
   useEffect(() => {
     fetchMovie(match.params.id)
@@ -30,16 +47,35 @@ const Movie = ({ movie, fetchMovie, match }) => {
     return (
       <div>
         <div>
-          <h3>{info.original_title}</h3>
+          <img src={info.poster_path ? `http://image.tmdb.org/t/p/w185${info.poster_path}` : placeholder} alt='poster'/>
+        </div>
+        <div>
+          <h1>{info.title}</h1>
+          <h3>{info.tagline}</h3>
           <p>{info.overview}</p>
+          <h3>Genres</h3>
+          <ul style={{display: 'flex'}}>
+            {info.genres && info.genres.map(x => {
+              return (<li key={`genre-${x.id}`}>{x.name}</li>)
+            })}
+          </ul>
+          <h3>Cast</h3>
           <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
             {people.cast && people.cast.map(x => {
               return (
                 <li key={`cast_${x.id}`}>
-                  <div style={{ position: 'relative', width: '45px', height: '45px', overflow: 'hidden', borderRadius: '50%' }}>
-                    <img src={x.profile_path !== null ? `http://image.tmdb.org/t/p/w185${x.profile_path}` : placeholder} alt='' style={{ display: 'block', width: '45px', height: 'auto' }} />
-                  </div>
+                  <AvatarContainer>
+                    <AvatarImg src={x.profile_path ? `http://image.tmdb.org/t/p/w185${x.profile_path}` : placeholder} alt='' />
+                  </AvatarContainer>
                 </li>
+              )
+            })}
+          </ul>
+          <h3>Recommendations</h3>
+          <ul>
+            {recommend.results && recommend.results.map(x => {
+              return (
+                <li key={x.id}>{x.title}</li>
               )
             })}
           </ul>

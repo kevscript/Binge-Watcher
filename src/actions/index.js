@@ -101,11 +101,12 @@ export const fetchMovieBegin = () => ({
   type: FETCH_MOVIE_BEGIN
 })
 
-export const fetchMovieSuccess = (info, people) => ({
+export const fetchMovieSuccess = (info, people, recommend) => ({
   type: FETCH_MOVIE_SUCCESS,
   payload: {
     info: info.data,
-    people: people.data
+    people: people.data,
+    recommend: recommend.data
   }
 })
 
@@ -120,8 +121,9 @@ export const fetchMovie = (movieId) => {
     dispatch(fetchMovieBegin())
     const infoPromise = await tmdbAPI.get(`/movie/${movieId}`)
     const peoplePromise = await tmdbAPI.get(`/movie/${movieId}/credits`)
-    await Promise.all([infoPromise, peoplePromise])
-      .then(([info, people]) => dispatch(fetchMovieSuccess(info, people)))
+    const recommendPromise = await tmdbAPI.get(`/movie/${movieId}/recommendations`)
+    await Promise.all([infoPromise, peoplePromise, recommendPromise])
+      .then(([info, people, recommend]) => dispatch(fetchMovieSuccess(info, people, recommend)))
       .catch(error => dispatch(fetchMovieError(error)))
   }
 }
