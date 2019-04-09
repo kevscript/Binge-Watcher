@@ -1,10 +1,12 @@
 import React from 'react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
-import Movies from './Movies'
-import Movie from './Movie'
-import Profile from './Profile'
-import Sidebar from './Sidebar'
+import MoviesPage from './MoviesPage'
+import MoviePage from './MoviePage'
+import ProfilePage from './ProfilePage'
+import SearchPage from './SearchPage'
+import Sidebar from '../components/Sidebar'
+import Searchbar from '../components/Searchbar'
 
 const Container = styled.div`
   display: flex;
@@ -31,19 +33,19 @@ const App = () => {
         <Sidebar />
       </SidebarContainer>
       <MainContainer>
+        <Searchbar />
         <Switch>
           <Route exact path='/' render={() => (
             <Redirect from='/' to='/movies' />
           )} />
-          <Route exact path='/movies' component={Movies} />
-          <Route path='/movies/:id' component={Movie} />
-          <Route path='/profile/:id' component={Profile} />
+          <Route exact path='/movies' component={MoviesPage} />
+          <Route path='/movies/:id' component={MoviePage} />
+          <Route path='/profile/:id' component={ProfilePage} />
+          <Route path='/search/:value' component={SearchPage} />
         </Switch>
       </MainContainer>
     </Container>
   )
 }
-
-
 
 export default withRouter(App)

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fetchProfile } from '../actions'
 import placeholder from '../assets/placeholder.png'
 
-const Profile = ({ profile, fetchProfile, match }) => {
+const ProfilePage = ({ profile, fetchProfile, match }) => {
   const { name, birthday, biography, profile_path } = profile
 
   useEffect(() => {
@@ -31,4 +31,4 @@ const mapDispatchToProps = {
   fetchProfile
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage)

@@ -12,7 +12,11 @@ import {
   FETCH_MOVIE_ERROR,
   FETCH_PROFILE_BEGIN,
   FETCH_PROFILE_SUCCESS,
-  FETCH_PROFILE_ERROR
+  FETCH_PROFILE_ERROR,
+  FETCH_SEARCH_BEGIN,
+  FETCH_SEARCH_SUCCESS,
+  FETCH_SEARCH_ERROR,
+  CHANGE_SEARCH_INPUT
 } from './types'
 
 
@@ -180,5 +184,49 @@ export const fetchProfile = (profileId) => {
     await Promise.all([profilePromise])
       .then(([profile]) => dispatch(fetchProfileSuccess(profile)))
       .catch(error => dispatch(fetchProfileError(error)))
+  }
+}
+
+
+
+
+
+
+
+
+
+
+// FETCHING SEARCH INPUT
+
+export const changeSearchInput = (val) => ({
+  type: CHANGE_SEARCH_INPUT,
+  payload: val
+})
+
+export const fetchSearchBegin = () => ({
+  type: FETCH_SEARCH_BEGIN
+})
+
+export const fetchSearchSuccess = (search) => ({
+  type: FETCH_SEARCH_SUCCESS,
+  payload: search.data
+})
+
+export const fetchSearchError = (error) => ({
+  type: FETCH_SEARCH_ERROR,
+  payload: error.message
+})
+
+export const fetchSearch = (query) => {
+  return async (dispatch) => {
+    dispatch(fetchSearchBegin())
+
+    const params = {
+      query: query
+    }
+    const searchPromise = await tmdbAPI.get('/search/movie', { params })
+    await Promise.all([searchPromise])
+      .then(([search]) => dispatch(fetchSearchSuccess(search)))
+      .catch(error => dispatch(fetchSearchError(error)))
   }
 }

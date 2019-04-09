@@ -26,7 +26,7 @@ const List = styled.ul`
 
 const ListLink = styled(Link)`
   text-decoration: none;
-  line-height: 2.5;
+  line-height: 3;
   color: #333;
 `
 
@@ -39,7 +39,7 @@ const ListItemText = styled.div`
   font-weight: ${props => props.selected ? 600 : 400};
   border: ${props => props.selected ? '1px solid rgba(0,0,0,0.2)' : '1px solid transparent'};
   border-radius: 15px;
-  padding: 5px 10px;
+  padding: 5px 15px;
   margin-bottom: 5px;
 
   :hover {

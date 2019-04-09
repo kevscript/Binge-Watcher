@@ -31,14 +31,14 @@ const AvatarImg = styled.img`
   height: auto;
 `
 
-const Movie = ({ movie, fetchMovie, match }) => {
+const MoviePage = ({ movie, fetchMovie, match }) => {
   const { info, people, recommend } = movie
 
   useEffect(() => {
     fetchMovie(match.params.id)
   }, [])
 
-  if (movie.loading === true) {
+  if (movie.loading) {
     return (
       <SpinnerContainer>
         <ImpulseSpinner size={100} color='blue' loading={movie.loading} />
@@ -95,4 +95,4 @@ const mapDispatchToProps = {
   fetchMovie
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Movie)
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage)

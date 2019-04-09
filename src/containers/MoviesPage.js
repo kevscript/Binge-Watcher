@@ -100,7 +100,7 @@ const MovieSubTitle = styled.div`
   font-size: 18px;
 `
 
-const Movies = ({ movies, fetchMovies }) => {
+const MoviesPage = ({ movies, fetchMovies }) => {
 
   const { page, total_pages, results, error, loading } = movies
 
@@ -181,4 +181,4 @@ const mapDispatchToProps = {
   fetchMovies
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Movies)
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage)

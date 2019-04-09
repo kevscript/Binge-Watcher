@@ -25,6 +25,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  
   case FETCH_GENRES:
     return {
       ...state,
@@ -33,6 +34,7 @@ export default (state = initialState, action) => {
 
   case FETCH_GENRES_ERROR:
     return {
+      ...state,
       error: action.payload
     }
 
