@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import placeholder from '../assets/placeholder.png'
 import styled from 'styled-components'
 import Spinner from '../components/Spinner'
+import MoviesList from '../components/MoviesList'
 
 const AvatarLink = styled(Link)`
   position: relative;
@@ -27,6 +28,7 @@ const MoviePage = ({ movie, fetchMovie, match }) => {
   const { info, people, recommend } = movie
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     fetchMovie(match.params.id)
   }, [])
 
@@ -63,13 +65,7 @@ const MoviePage = ({ movie, fetchMovie, match }) => {
             })}
           </ul>
           <h3>Recommendations</h3>
-          <ul>
-            {recommend.results && recommend.results.map(x => {
-              return (
-                <li key={x.id}>{x.title}</li>
-              )
-            })}
-          </ul>
+          <MoviesList data={recommend.results} />
         </div>
       </div>
     )

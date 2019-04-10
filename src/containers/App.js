@@ -39,7 +39,7 @@ const App = () => {
             <Redirect from='/' to='/movies' />
           )} />
           <Route exact path='/movies' component={MoviesPage} />
-          <Route path='/movies/:id' component={MoviePage} />
+          <Route path='/movies/:id' component={(props) => <MoviePage timestamp={new Date().toString()} {...props} />} />
           <Route path='/profile/:id' component={ProfilePage} />
           <Route path='/search/:value' component={SearchPage} />
         </Switch>

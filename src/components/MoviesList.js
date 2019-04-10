@@ -30,7 +30,7 @@ const MovieLink = styled(Link)`
 
 const MoviePosterContainer = styled.div`
   position: relative; 
-  height: calc(100% - 80px); 
+  height: calc(100% - 80px);
   overflow: hidden;
   border-radius: 10px 10px 0 0;
 `
