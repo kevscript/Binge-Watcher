@@ -3,16 +3,8 @@ import { connect } from 'react-redux'
 import { fetchMovie } from '../actions'
 import { Link } from 'react-router-dom'
 import placeholder from '../assets/placeholder.png'
-import { ImpulseSpinner } from 'react-spinners-kit'
 import styled from 'styled-components'
-
-const SpinnerContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+import Spinner from '../components/Spinner'
 
 const AvatarLink = styled(Link)`
   position: relative;
@@ -40,9 +32,7 @@ const MoviePage = ({ movie, fetchMovie, match }) => {
 
   if (movie.loading) {
     return (
-      <SpinnerContainer>
-        <ImpulseSpinner size={100} color='blue' loading={movie.loading} />
-      </SpinnerContainer>
+      <Spinner size={100} color={'blue'} loading={movie.loading} />
     )
   } else {
     return (
