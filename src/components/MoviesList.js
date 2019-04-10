@@ -56,7 +56,6 @@ const MovieSubTitle = styled.div`
   font-size: 18px;
 `
 
-
 const MoviesList = ({data}) => {
   return (
     <MoviesListContainer>
