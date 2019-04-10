@@ -14,9 +14,7 @@ const MoviesPage = ({ movies, fetchMovies }) => {
   }, [])
 
   if (loading === true) {
-    return (
-      <Spinner size={100} color={'blue'} loading={loading} />
-    )
+    return <Spinner size={100} color={'blue'} loading={loading} />
   } else if (error) {
     return <h1>{error}</h1>
   } else {

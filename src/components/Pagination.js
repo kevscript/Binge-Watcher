@@ -30,19 +30,19 @@ const PrimaryButton = styled.button`
   }
 `
 
-const Pagination = ({ fetchData, page, totalPages}) => {
+const Pagination = ({ fetchData, page, totalPages, query = ''}) => {
 
   return (
     <PaginationContainer>
       <PrimaryButton 
-        onClick={() => fetchData(page - 1)}
+        onClick={() => query ? fetchData(page - 1, query) : fetchData(page - 1)}
         disabled={page === 1 ? true : false}
       >
         {`page ${page - 1}`}
       </PrimaryButton>
       {page} / {totalPages}
       <PrimaryButton 
-        onClick={() => fetchData(page + 1)}
+        onClick={() => query ? fetchData(page + 1, query) : fetchData(page + 1)}
         disabled={page === totalPages ? true : false}
       >
         {`page ${page + 1}`}

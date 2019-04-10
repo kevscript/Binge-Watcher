@@ -217,12 +217,13 @@ export const fetchSearchError = (error) => ({
   payload: error.message
 })
 
-export const fetchSearch = (query) => {
+export const fetchSearch = (page = 1, query) => {
   return async (dispatch) => {
     dispatch(fetchSearchBegin())
 
     const params = {
-      query: query
+      query: query,
+      page: page
     }
     const searchPromise = await tmdbAPI.get('/search/movie', { params })
     await Promise.all([searchPromise])

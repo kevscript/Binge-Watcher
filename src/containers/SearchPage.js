@@ -1,23 +1,30 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchSearch } from '../actions'
-import { Link } from 'react-router-dom'
-import placeholder from '../assets/placeholder.png'
-import { ImpulseSpinner } from 'react-spinners-kit'
-import styled from 'styled-components'
+import Spinner from '../components/Spinner'
+import MoviesList from '../components/MoviesList'
+import Pagination from '../components/Pagination'
+
 
 
 const SearchPage = ({ fetchSearch, search, match }) => {
 
+  const { results, page, total_pages, loading } = search
+
   useEffect(() => {
-    fetchSearch(match.params.value)
+    fetchSearch(1, match.params.value)
   }, [])
 
-  if (search.loading) {
-    return <h1>Loading</h1>
+  if (loading) {
+    return <Spinner size={100} color={'blue'} loading={loading} />
   } else {
     return (
-      <h1>SearchPage</h1>
+      <div>
+        <p>Search results for {match.params.value}</p>
+        <Pagination fetchData={fetchSearch} page={page} totalPages={total_pages} query={match.params.value} />
+        <MoviesList data={results} />
+        <Pagination fetchData={fetchSearch} page={page} totalPages={total_pages} query={match.params.value} />
+      </div>
     )
   }
 
