@@ -16,7 +16,7 @@ const ListContainer = styled.div`
 const OptionTitle = styled.h3`
   text-transform: uppercase;
   line-height: 3;
-  color: blue;
+  color: ${props => props.theme.colors.primary};
 `
 
 const List = styled.ul`
@@ -27,7 +27,7 @@ const List = styled.ul`
 const ListLink = styled(Link)`
   text-decoration: none;
   line-height: 3;
-  color: #333;
+  color: ${props => props.theme.colors.text};
 `
 
 const ListItemText = styled.div`

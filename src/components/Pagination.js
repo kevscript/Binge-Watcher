@@ -8,25 +8,30 @@ const PaginationContainer = styled.div`
   width: 80%;
   margin: 0 auto;
   height: 80px;
+  color: ${props => props.theme.colors.primary};
 `
 
 const PrimaryButton = styled.button`
   cursor: pointer;
+  outline: none;
+  border: 1px solid transparent;
   display: block;
   padding: 8px 20px;
-  border: 1px solid #f4f4f4;
   border-radius: 15px;
-  background-color: transparent;
   font-family: 'Source Sans Pro', 'Roboto', sans-serif;
-  transition: 0.3s;
+  background: ${props => props.theme.colors.primary};
+  color: #fff;
+  transition: 0.2s;
 
   :disabled {
-    opacity: 0.5;
+    opacity: 0.1;
     color: transparent;
   }
 
   :hover:enabled {
     border: 1px solid rgba(0,0,0,0.2);
+    background: transparent;
+    color: ${props => props.theme.colors.text};
   }
 `
 

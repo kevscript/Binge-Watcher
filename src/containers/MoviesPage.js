@@ -4,6 +4,12 @@ import { fetchMovies } from '../actions'
 import Pagination from '../components/Pagination'
 import MoviesList from '../components/MoviesList'
 import Spinner from '../components/Spinner'
+import styled from 'styled-components'
+
+const MoviesPageContainer = styled.div`
+  width: 90%;
+  margin: 0 auto
+`
 
 const MoviesPage = ({ movies, fetchMovies }) => {
 
@@ -14,16 +20,16 @@ const MoviesPage = ({ movies, fetchMovies }) => {
   }, [])
 
   if (loading === true) {
-    return <Spinner size={100} color={'blue'} loading={loading} />
+    return <Spinner size={100} loading={loading} />
   } else if (error) {
     return <h1>{error}</h1>
   } else {
     return (
-      <div>
+      <MoviesPageContainer>
         <Pagination fetchData={fetchMovies} page={page} totalPages={total_pages} />
         <MoviesList data={results} />
         <Pagination fetchData={fetchMovies} page={page} totalPages={total_pages} />
-      </div>
+      </MoviesPageContainer>
     )
   }
 }

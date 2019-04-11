@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ImpulseSpinner } from 'react-spinners-kit'
+import theme from '../styles/theme'
 
 const SpinnerContainer = styled.div`
   width: 100%;
@@ -9,10 +10,10 @@ const SpinnerContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-const Spinner = ({size, color, loading}) => {
+const Spinner = ({size, loading}) => {
   return (
     <SpinnerContainer>
-      <ImpulseSpinner size={size} color={color} loading={loading} />
+      <ImpulseSpinner size={size} color={theme.colors.primary} loading={loading} />
     </SpinnerContainer>
   )
 }

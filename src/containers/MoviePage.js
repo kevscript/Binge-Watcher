@@ -3,9 +3,24 @@ import { connect } from 'react-redux'
 import { fetchMovie } from '../actions'
 import Spinner from '../components/Spinner'
 import MoviesList from '../components/MoviesList'
-import CastList from '../components/CastList'
 import MovieInfo from '../components/MovieInfo'
+import styled from 'styled-components'
 
+const MoviePageContainer = styled.div`
+  width: 90%;
+  margin: 0 auto
+`
+
+const Title = styled.h3`
+  color: ${props => props.theme.colors.primary};
+  text-transform: uppercase;
+  line-height: 3;
+`
+
+const Brake = styled.div`
+  width: 100%;
+  height: 50px;
+`
 const MoviePage = ({ movie, fetchMovie, match }) => {
   const { info, people, recommend } = movie
 
@@ -16,17 +31,16 @@ const MoviePage = ({ movie, fetchMovie, match }) => {
 
   if (movie.loading) {
     return (
-      <Spinner size={100} color={'blue'} loading={movie.loading} />
+      <Spinner size={100} loading={movie.loading} />
     )
   } else {
     return (
-      <div>
-        <MovieInfo data={info} />
-        <h3>Cast</h3>
-        <CastList data={people} />
-        <h3>Recommendations</h3>
+      <MoviePageContainer>
+        <MovieInfo info={info} cast={people} />
+        <Brake />
+        <Title>Recommendations</Title>
         <MoviesList data={recommend.results} />
-      </div>
+      </MoviePageContainer>
     )
   }
 }

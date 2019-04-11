@@ -16,7 +16,7 @@ const SearchPage = ({ fetchSearch, search, match }) => {
   }, [])
 
   if (loading) {
-    return <Spinner size={100} color={'blue'} loading={loading} />
+    return <Spinner size={100} loading={loading} />
   } else {
     return (
       <div>

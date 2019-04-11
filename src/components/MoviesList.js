@@ -6,7 +6,7 @@ import placeholder from '../assets/placeholder.png'
 const MoviesListContainer = styled.div`
   display: flex;
   flex-wrap: wrap; 
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   margin: 0 auto;
 `
@@ -14,7 +14,7 @@ const MoviesListContainer = styled.div`
 const MoviesListItem = styled.div`
   width: 250px;
   border-radius: 10px; 
-  margin: 25px;
+  margin: 25px 0;
   transition: 0.3s;
 
   :hover {
