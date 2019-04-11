@@ -11,6 +11,11 @@ const ProfilePageContainer = styled.div`
   margin: 0 auto
 `
 
+const Title = styled.h3`
+  color: ${props => props.theme.colors.primary};
+  text-transform: uppercase;
+  line-height: 3;
+`
 
 const ProfilePage = ({ profile, fetchProfile, match }) => {
   const { info, starring, loading } = profile
@@ -33,8 +38,15 @@ const ProfilePage = ({ profile, fetchProfile, match }) => {
         </div>
         <p>{info.birthday}</p>
         <p>{info.biography}</p>
-        <h3>Also starred in</h3>
-        <MoviesList data={starring.cast} />
+        {starring.cast.length > 0
+          ? (
+            <div>
+              <Title>Also starred in</Title>
+              <MoviesList data={starring.cast} />
+            </div>
+          )
+          : null
+        }
       </ProfilePageContainer>
     )
   }
