@@ -6,7 +6,6 @@ import MoviePage from './MoviePage'
 import ProfilePage from './ProfilePage'
 import SearchPage from './SearchPage'
 import Sidebar from '../components/Sidebar'
-import Searchbar from '../components/Searchbar'
 
 const Container = styled.div`
   display: flex;
@@ -33,7 +32,6 @@ const App = () => {
         <Sidebar />
       </SidebarContainer>
       <MainContainer>
-        <Searchbar />
         <Switch>
           <Route exact path='/' render={() => (
             <Redirect from='/' to='/movies' />

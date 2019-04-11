@@ -4,6 +4,12 @@ import { fetchSearch } from '../actions'
 import Spinner from '../components/Spinner'
 import MoviesList from '../components/MoviesList'
 import Pagination from '../components/Pagination'
+import styled from 'styled-components'
+
+const SearchPageContainer = styled.div`
+  width: 90%;
+  margin: 0 auto
+`
 
 
 
@@ -19,12 +25,12 @@ const SearchPage = ({ fetchSearch, search, match }) => {
     return <Spinner size={100} loading={loading} />
   } else {
     return (
-      <div>
+      <SearchPageContainer>
         <p>Search results for {match.params.value}</p>
         <Pagination fetchData={fetchSearch} page={page} totalPages={total_pages} query={match.params.value} />
         <MoviesList data={results} />
         <Pagination fetchData={fetchSearch} page={page} totalPages={total_pages} query={match.params.value} />
-      </div>
+      </SearchPageContainer>
     )
   }
 

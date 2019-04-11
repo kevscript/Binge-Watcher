@@ -24,14 +24,15 @@ const PrimaryButton = styled.button`
   transition: 0.2s;
 
   :disabled {
-    opacity: 0.1;
-    color: transparent;
+    opacity: 0;
+    display: none;
   }
 
   :hover:enabled {
     border: 1px solid rgba(0,0,0,0.2);
     background: transparent;
     color: ${props => props.theme.colors.text};
+    transform: scale(1.1);
   }
 `
 

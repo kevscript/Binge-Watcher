@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchGenres, selectSort, selectGenres } from '../actions'
+import Searchbar from './Searchbar'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -69,6 +70,8 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
 
   return (
     <Container>
+      <OptionTitle>Search</OptionTitle>
+      <Searchbar />
       <ListContainer>
         <OptionTitle>Sort By</OptionTitle>
         <List>
