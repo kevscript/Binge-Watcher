@@ -167,9 +167,12 @@ export const fetchProfileBegin = () => ({
   type: FETCH_PROFILE_BEGIN
 })
 
-export const fetchProfileSuccess = (profile) => ({
+export const fetchProfileSuccess = (info, starring) => ({
   type: FETCH_PROFILE_SUCCESS,
-  payload: profile.data
+  payload: {
+    info: info.data,
+    starring: starring.data
+  }
 })
 
 export const fetchProfileError = (error) => ({
@@ -180,9 +183,10 @@ export const fetchProfileError = (error) => ({
 export const fetchProfile = (profileId) => {
   return async (dispatch) => {
     dispatch(fetchProfileBegin())
-    const profilePromise = await tmdbAPI.get(`/person/${profileId}`)
-    await Promise.all([profilePromise])
-      .then(([profile]) => dispatch(fetchProfileSuccess(profile)))
+    const infoPromise = await tmdbAPI.get(`/person/${profileId}`)
+    const starringPromise = await tmdbAPI.get(`/person/${profileId}/movie_credits`)
+    await Promise.all([infoPromise, starringPromise])
+      .then(([info, starring]) => dispatch(fetchProfileSuccess(info, starring)))
       .catch(error => dispatch(fetchProfileError(error)))
   }
 }

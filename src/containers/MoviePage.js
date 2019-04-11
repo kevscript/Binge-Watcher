@@ -22,24 +22,31 @@ const Brake = styled.div`
   height: 50px;
 `
 const MoviePage = ({ movie, fetchMovie, match }) => {
-  const { info, people, recommend } = movie
+  const { info, people, recommend, loading } = movie
 
   useEffect(() => {
     window.scrollTo(0, 0)
     fetchMovie(match.params.id)
   }, [])
 
-  if (movie.loading) {
+  if (loading) {
     return (
-      <Spinner size={100} loading={movie.loading} />
+      <Spinner size={100} loading={loading} />
     )
   } else {
     return (
       <MoviePageContainer>
         <MovieInfo info={info} cast={people} />
         <Brake />
-        <Title>Recommendations</Title>
-        <MoviesList data={recommend.results} />
+        {recommend.results.length > 0
+          ? (
+            <div>
+              <Title>Recommendations</Title>
+              <MoviesList data={recommend.results} />
+            </div>
+          )
+          : null
+        }
       </MoviePageContainer>
     )
   }

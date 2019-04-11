@@ -4,17 +4,21 @@ export default (state = { loading: true }, action) => {
   switch (action.type) {
   case FETCH_PROFILE_BEGIN:
     return {
+      ...state,
       loading: true
     }
 
   case FETCH_PROFILE_SUCCESS:
     return {
+      ...state,
       loading: false,
-      ...action.payload
+      info: { ...action.payload.info },
+      starring: { ...action.payload.starring }
     }
 
   case FETCH_PROFILE_ERROR:
     return {
+      ...state,
       loading: false,
       error: action.payload
     }
