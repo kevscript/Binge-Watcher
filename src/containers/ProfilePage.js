@@ -11,15 +11,38 @@ const ProfilePageContainer = styled.div`
   margin: 0 auto
 `
 
+const ProfileInfoContainer = styled.div`
+  margin: 50px 0;
+  display: flex;
+  align-items: center;
+`
+
 const Title = styled.h3`
   color: ${props => props.theme.colors.primary};
   text-transform: uppercase;
   line-height: 3;
 `
 
+const ProfileImgContainer = styled.div`
+  margin-right: 50px;
+  max-width: 182px;
+`
+
+const ProfileImg = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+`
+
+const BioText = styled.p`
+  margin-top: 25px;
+  max-width: 500px
+`
+
+const ProfileInfo = styled.div``
+
 const ProfilePage = ({ profile, fetchProfile, match }) => {
   const { info, starring, loading } = profile
-
 
   useEffect(() => {
     fetchProfile(match.params.id)
@@ -32,12 +55,15 @@ const ProfilePage = ({ profile, fetchProfile, match }) => {
   } else {
     return (
       <ProfilePageContainer>
-        <h1>{info.name}</h1>
-        <div>
-          <img src={info.profile_path ? `http://image.tmdb.org/t/p/w185${info.profile_path}` : placeholder} alt={info.name} />
-        </div>
-        <p>{info.birthday}</p>
-        <p>{info.biography}</p>
+        <ProfileInfoContainer>
+          <ProfileImgContainer>
+            <ProfileImg src={info.profile_path ? `http://image.tmdb.org/t/p/w185${info.profile_path}` : placeholder} alt={info.name} />
+          </ProfileImgContainer>
+          <ProfileInfo>
+            <h1>{info.name}</h1>
+            <BioText>{info.biography}</BioText>
+          </ProfileInfo>
+        </ProfileInfoContainer>
         {starring.cast.length > 0
           ? (
             <div>
