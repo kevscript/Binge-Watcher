@@ -26,12 +26,14 @@ const List = styled.ul`
 `
 
 const ListLink = styled(Link)`
+  cursor: default;
   text-decoration: none;
   line-height: 3;
   color: ${props => props.theme.colors.text};
 `
 
 const ListItemText = styled.div`
+  cursor: pointer;
   display: flex;
   justify-content: flex-start;
   align-items: center;

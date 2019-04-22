@@ -18,11 +18,25 @@ const SidebarContainer = styled.div`
   width: 300px;
   overflow-x: hidden;
   position: fixed;
+  left 0;
+  transition: all 0.5s;
+
+  @media (max-width: 1000px) {
+    left: -300px;
+    transition: all 0.5s;
+  }
 `
 
 const MainContainer = styled.div`
   width: calc(100% - 300px);
   margin-left: 300px;
+  transition: all 0.5s;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    margin-left: 0;
+    transition: all 0.5s;
+  }
 `
 
 const App = () => {

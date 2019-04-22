@@ -15,6 +15,10 @@ const Title = styled.h3`
   color: ${props => props.theme.colors.primary};
   text-transform: uppercase;
   line-height: 3;
+
+  @media (max-width: 700px) {
+    text-align: center;
+  }
 `
 
 const Brake = styled.div`

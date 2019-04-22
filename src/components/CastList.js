@@ -7,6 +7,10 @@ const CastContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+
+  @media (max-width: 700px) {
+    justify-content: center;
+  }
 `
 const CastItem = styled.li`
   position: relative;

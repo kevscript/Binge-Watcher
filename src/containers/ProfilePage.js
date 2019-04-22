@@ -15,17 +15,28 @@ const ProfileInfoContainer = styled.div`
   margin: 50px 0;
   display: flex;
   align-items: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 
 const Title = styled.h3`
   color: ${props => props.theme.colors.primary};
   text-transform: uppercase;
   line-height: 3;
+
+  @media (max-width: 600px) {
+    text-align: center;
+  }
 `
 
 const ProfileImgContainer = styled.div`
-  margin-right: 50px;
   max-width: 182px;
+
+  @media (max-width: 600px) {
+    margin: 0 auto;
+  }
 `
 
 const ProfileImg = styled.img`
@@ -35,11 +46,19 @@ const ProfileImg = styled.img`
 `
 
 const BioText = styled.p`
-  margin-top: 25px;
+  margin-top: 20px;
   max-width: 500px
 `
 
-const ProfileInfo = styled.div``
+const ProfileInfo = styled.div`
+  margin-left: 50px;
+
+  @media (max-width: 600px) {
+    margin-left: 0;
+    aling-items: center;
+    text-align: center;
+  }
+`
 
 const ProfilePage = ({ profile, fetchProfile, match }) => {
   const { info, starring, loading } = profile
