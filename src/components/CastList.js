@@ -35,6 +35,8 @@ const AvatarImg = styled.img`
   height: auto;
 `
 
+CastItem.displayName = 'CastItem'
+
 const CastList = ({data}) => {
 
   return (

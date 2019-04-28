@@ -79,6 +79,8 @@ const MovieRating = styled(MovieSubTitle)`
   color: ${props => props.theme.colors.primary}
 `
 
+MoviesListItem.displayName = 'MoviesListItem'
+
 const MoviesList = ({ data }) => {
   return (
     <MoviesListContainer>

@@ -9,7 +9,6 @@ describe('Burger component', () => {
     const lines = container.find('BurgerLine')
     expect(lines).toHaveLength(3)
   })
-
 })
 
 
