@@ -16,6 +16,9 @@ const BurgerLine = styled.div`
   margin: 3px 0;
 `
 
+BurgerContainer.displayName = 'BurgerContainer'
+BurgerLine.displayName = 'BurgerLine'
+
 const Burger = () => {
   return (
     <BurgerContainer>
