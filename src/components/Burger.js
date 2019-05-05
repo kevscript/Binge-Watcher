@@ -5,7 +5,7 @@ const BurgerContainer = styled.div`
   width: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center:
+  justify-content: center;
   align-items: center;
 `
 
