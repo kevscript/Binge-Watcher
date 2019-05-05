@@ -19,6 +19,7 @@ export default (state = { loading: true, input: '' }, action) => {
     return {
       ...state,
       loading: false,
+      input: '',
       ...action.payload
     }
 
