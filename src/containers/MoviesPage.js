@@ -4,11 +4,12 @@ import { fetchMovies } from '../actions'
 import Pagination from '../components/Pagination'
 import MoviesList from '../components/MoviesList'
 import Spinner from '../components/Spinner'
+import Error from '../components/Error'
 import styled from 'styled-components'
 
 const MoviesPageContainer = styled.div`
   width: 90%;
-  margin: 0 auto
+  margin: 0 auto;
 `
 
 const MoviesPage = ({ movies, fetchMovies }) => {
@@ -22,7 +23,9 @@ const MoviesPage = ({ movies, fetchMovies }) => {
   if (loading === true) {
     return <Spinner size={100} loading={loading} />
   } else if (error) {
-    return <h1>{error}</h1>
+    return <Error message={error} />
+  } else if (results.length === 0) {
+    return  <Error message='No Results Found.' />
   } else {
     return (
       <MoviesPageContainer>
