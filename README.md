@@ -1,6 +1,6 @@
 ## 1. About
 
-Binge Watcher is a React app based on The Movie Database.
+Binge Watcher is a React app based on The Movie Database. [Live Demo](https://stoic-dijkstra-bbde61.netlify.com)
 
 Tech Stack:
 - React
