@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 const MoviePageContainer = styled.div`
   width: 90%;
-  margin: 0 auto
+  margin: 0 auto;
 `
 
 const Title = styled.h3`
@@ -26,7 +26,7 @@ const Brake = styled.div`
   height: 50px;
 `
 const MoviePage = ({ movie, fetchMovie, match }) => {
-  const { info, people, recommend, loading } = movie
+  const { info, people, recommend, video, loading } = movie
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -40,7 +40,7 @@ const MoviePage = ({ movie, fetchMovie, match }) => {
   } else {
     return (
       <MoviePageContainer>
-        <MovieInfo info={info} cast={people} />
+        <MovieInfo info={info} cast={people} video={video} />
         <Brake />
         {recommend.results.length > 0
           ? (

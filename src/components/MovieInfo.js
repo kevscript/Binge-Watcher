@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import placeholder from '../assets/placeholder.png'
 import CastList from './CastList'
+import Iframe from './Iframe'
 
 const MovieInfoContainer = styled.div`
   display: flex;
@@ -110,7 +111,36 @@ const Brake = styled.div`
   height: 25px;
 `
 
-const MovieInfo = ({info, cast}) => {
+const TrailerButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+
+  @media (max-width: 700px) {
+    justify-content: center;
+  }
+`
+
+const TrailerButton = styled.button`
+  font-family: 'Source Sans Pro', sans-serif;
+  cursor: pointer;
+  background: ${props => props.theme.colors.primary};
+  padding: 5px 15px;
+  color: #f4f4f4;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+`
+
+const MovieInfo = ({ info, cast, video }) => {
+  const videoRef = useRef()
+  const [openVideo, setOpenVideo] = useState(false)
+
+  const handleVideo = (e) => {
+    if(openVideo && videoRef.current === e.target) {
+      setOpenVideo(false)
+    }
+  }
+
   return (
     <MovieInfoContainer>
       <PosterContainer>
@@ -120,9 +150,14 @@ const MovieInfo = ({info, cast}) => {
         <div>
           <Title>{info.title}</Title>
           <SubTitle>{info.tagline}</SubTitle>
-          <Option>{info.vote_average === 0 ? info.release_date : info.vote_average}</Option>
+          <Option>{info.vote_average === 0 ? info.release_date : info.vote_average} / 10</Option>
           <Text>{info.overview}</Text>
         </div>
+        <Brake />
+        <TrailerButtonContainer>
+          {video.results.length > 0 && <TrailerButton onClick={() => setOpenVideo(true)}>Watch Trailer</TrailerButton>}
+          {openVideo && <Iframe id={video.results[0].key} videoRef={videoRef} handleVideo={handleVideo} />}
+        </TrailerButtonContainer>
         <Brake />
         <Option>Genres</Option>
         <GenresList>

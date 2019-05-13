@@ -59,7 +59,6 @@ const Menu = styled.div`
 const App = () => {
 
   const [toggleMenu, setToggleMenu] = useState(false)
-  const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
     window.addEventListener('resize', handleWindow)
@@ -70,8 +69,6 @@ const App = () => {
   }
 
   const handleWindow = () => {
-    setWindowWidth(window.innerWidth)
-
     if (window.innerWidth >= 1000) {
       setToggleMenu(false)
     }
