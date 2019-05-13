@@ -12,7 +12,8 @@ export default (state = { loading: true }, action) => {
       loading: false,
       info: { ...action.payload.info },
       people: { ...action.payload.people },
-      recommend: { ...action.payload.recommend }
+      recommend: { ...action.payload.recommend },
+      video: { ...action.payload.video }
     }
 
   case FETCH_MOVIE_ERROR:
