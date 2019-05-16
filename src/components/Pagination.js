@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -55,6 +56,13 @@ const Pagination = ({ fetchData, page, totalPages, query = ''}) => {
       </PrimaryButton>
     </PaginationContainer>
   )
+}
+
+Pagination.propTypes = {
+  page: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  query: PropTypes.string,
+  fetchData: PropTypes.func.isRequired
 }
 
 export default Pagination

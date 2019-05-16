@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import placeholder from '../assets/placeholder.png'
 import CastList from './CastList'
 import Iframe from './Iframe'
+import PropTypes from 'prop-types'
 
 const MovieInfoContainer = styled.div`
   display: flex;
@@ -173,6 +174,28 @@ const MovieInfo = ({ info, cast, video }) => {
       </InfoContainer>
     </MovieInfoContainer>
   )
+}
+
+MovieInfo.propTypes = {
+
+  info: PropTypes.shape({
+    poster_path: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    tagline: PropTypes.string.isRequired,
+    vote_average: PropTypes.number,
+    release_date: PropTypes.string,
+    overview: PropTypes.string.isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired
+      })
+    )
+  }),
+
+  video: PropTypes.object,
+  cast: PropTypes.object,
+
 }
 
 export default MovieInfo

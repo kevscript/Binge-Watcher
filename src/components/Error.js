@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ErrorContainer = styled.div`
   width: 90%;
@@ -21,6 +22,10 @@ const Error = ({message}) => {
       <ErrorMessage>{message}</ErrorMessage>
     </ErrorContainer>
   )
+}
+
+Error.propTypes = {
+  message: PropTypes.string
 }
 
 export default Error

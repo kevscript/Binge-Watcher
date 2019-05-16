@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import { fetchGenres, selectSort, selectGenres } from '../actions'
 import Searchbar from './Searchbar'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 30px;
 `
 
 const ListContainer = styled.div`
@@ -30,6 +32,17 @@ const ListLink = styled(Link)`
   text-decoration: none;
   line-height: 3;
   color: ${props => props.theme.colors.text};
+`
+
+const LogoLink = styled(Link)`
+  font-family: 'Source Sans Pro', sans-serif;
+  text-decoration: none;
+  color: #000;
+  font-size: 26px;
+  line-height: 0;
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-transform: uppercase;
 `
 
 const ListItemText = styled.div`
@@ -72,6 +85,7 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
 
   return (
     <Container>
+      <LogoLink to='/movies'>Binge-Watcher</LogoLink>
       <OptionTitle>Search</OptionTitle>
       <Searchbar />
       <ListContainer>
@@ -132,5 +146,29 @@ const mapDispatchToProps = {
   selectGenres,
 }
 
+Sidebar.propTypes = {
+
+  options: PropTypes.shape({
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        selected: PropTypes.bool.isRequired
+      })
+    ).isRequired,
+    sortBy: PropTypes.arrayOf(
+      PropTypes.shape({
+        query: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        selected: PropTypes.bool.isRequired
+      })
+    ).isRequired
+  }).isRequired,
+
+  fetchGenres: PropTypes.func.isRequired,
+  selectGenres: PropTypes.func.isRequired,
+  selectSort: PropTypes.func.isRequired,
+
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)

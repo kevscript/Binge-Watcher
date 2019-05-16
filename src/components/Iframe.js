@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-
-
+import PropTypes from 'prop-types'
 
 const PlayerContainer = styled.div`
   display: flex;
@@ -35,6 +34,14 @@ const Iframe = ({ id, videoRef, handleVideo }) => {
     </PlayerContainer>,
     document.getElementById('portal-root')
   )
+}
+
+Iframe.propTypes = {
+  id: PropTypes.number,
+  handleVideo: PropTypes.func.isRequired,
+  videoRef: PropTypes.shape({ 
+    current: PropTypes.instanceOf(Element) 
+  })
 }
 
 export default Iframe

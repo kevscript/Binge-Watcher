@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom' 
 import styled from 'styled-components'
 import placeholder from '../assets/placeholder.png'
+import PropTypes from 'prop-types'
 
 const CastContainer = styled.ul`
   display: flex;
@@ -50,6 +51,17 @@ const CastList = ({data}) => {
       })}
     </CastContainer>
   )
+}
+
+CastList.propTypes = {
+  data: PropTypes.shape({
+    cast: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        profile_path: PropTypes.string
+      })
+    )
+  })
 }
 
 export default CastList

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import placeholder from '../assets/placeholder.png'
+import PropTypes from 'prop-types'
 
 const MoviesListContainer = styled.div`
   display: flex;
@@ -76,7 +77,7 @@ const MovieSubTitle = styled.span`
 
 const MovieRating = styled(MovieSubTitle)`
   font-weight: 800;
-  color: ${props => props.theme.colors.primary}
+  color: ${props => props.theme.colors.primary};
 `
 
 const MoviesList = ({ data }) => {
@@ -102,6 +103,18 @@ const MoviesList = ({ data }) => {
       })}
     </MoviesListContainer>
   )
+}
+
+MoviesList.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.string,
+      title: PropTypes.string.isRequired,
+      vote_average: PropTypes.number,
+      release_date: PropTypes.string
+    })
+  ).isRequired
 }
 
 export default MoviesList
