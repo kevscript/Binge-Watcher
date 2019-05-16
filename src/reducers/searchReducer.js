@@ -1,6 +1,15 @@
 import { FETCH_SEARCH_BEGIN, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR, CHANGE_SEARCH_INPUT } from '../actions/types'
 
-export default (state = { loading: true, input: '' }, action) => {
+const initialState = {
+  loading: true,
+  input: '',
+  page: 0,
+  total_pages: 0,
+  results: [],
+  total_results: 0
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
   case CHANGE_SEARCH_INPUT:
     return {
@@ -10,17 +19,17 @@ export default (state = { loading: true, input: '' }, action) => {
     }
 
   case FETCH_SEARCH_BEGIN:
-    return {
-      ...state,
-      loading: true
-    }
+    return state
 
   case FETCH_SEARCH_SUCCESS:
     return {
       ...state,
       loading: false,
       input: '',
-      ...action.payload
+      page: action.payload.page,
+      total_results: action.payload.total_results,
+      total_pages: action.payload.total_pages,
+      results: [...action.payload.results]
     }
 
   case FETCH_SEARCH_ERROR:

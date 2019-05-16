@@ -6,6 +6,7 @@ import Error from '../components/Error'
 import MoviesList from '../components/MoviesList'
 import Pagination from '../components/Pagination'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const SearchPageContainer = styled.div`
   width: 90%;
@@ -62,6 +63,24 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchSearch
+}
+
+SearchPage.propTypes = {
+
+  search: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    results: PropTypes.arrayOf(PropTypes.object).isRequired, 
+    page: PropTypes.number.isRequired, 
+    total_pages: PropTypes.number.isRequired
+  }).isRequired,
+
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+
+  fetchSearch: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { changeSearchInput } from '../actions'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const SearchContainer = styled.div`
   display: flex;
@@ -48,6 +49,15 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   changeSearchInput
+}
+
+Searchbar.propTypes = {
+
+  search: PropTypes.shape({
+    input: PropTypes.string
+  }).isRequired,
+
+  changeSearchInput: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Searchbar)
