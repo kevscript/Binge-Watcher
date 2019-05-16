@@ -1,11 +1,17 @@
 import { FETCH_MOVIE_BEGIN, FETCH_MOVIE_SUCCESS, FETCH_MOVIE_ERROR } from '../actions/types'
 
-export default (state = { loading: true }, action) => {
+const initialState = {
+  loading: true,
+  info: {},
+  people: {},
+  recommend: {},
+  video: {}
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
   case FETCH_MOVIE_BEGIN:
-    return {
-      loading: true
-    }
+    return state
 
   case FETCH_MOVIE_SUCCESS:
     return {
@@ -18,6 +24,7 @@ export default (state = { loading: true }, action) => {
 
   case FETCH_MOVIE_ERROR:
     return {
+      ...state,
       loading: false,
       error: action.payload
     }

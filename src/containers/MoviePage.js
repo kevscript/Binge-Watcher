@@ -5,6 +5,7 @@ import Spinner from '../components/Spinner'
 import MoviesList from '../components/MoviesList'
 import MovieInfo from '../components/MovieInfo'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const MoviePageContainer = styled.div`
   width: 90%;
@@ -56,13 +57,32 @@ const MoviePage = ({ movie, fetchMovie, match }) => {
   }
 }
 
-
 const mapStateToProps = (state) => ({
   movie: state.movie
 })
 
 const mapDispatchToProps = {
   fetchMovie
+}
+
+MoviePage.propTypes = {
+  movie: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    info: PropTypes.object.isRequired,
+    people: PropTypes.object.isRequired,
+    recommend: PropTypes.shape({
+      results: PropTypes.arrayOf(PropTypes.object)
+    }).isRequired,
+    video: PropTypes.object.isRequired
+  }).isRequired,
+
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+  
+  fetchMovie: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage)
