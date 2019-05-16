@@ -5,10 +5,11 @@ import placeholder from '../assets/placeholder.png'
 import Spinner from '../components/Spinner'
 import MoviesList from '../components/MoviesList'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ProfilePageContainer = styled.div`
   width: 90%;
-  margin: 0 auto
+  margin: 0 auto;
 `
 
 const ProfileInfoContainer = styled.div`
@@ -47,7 +48,7 @@ const ProfileImg = styled.img`
 
 const BioText = styled.p`
   margin-top: 20px;
-  max-width: 500px
+  max-width: 500px;
 `
 
 const ProfileInfo = styled.div`
@@ -103,6 +104,22 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchProfile
+}
+
+ProfilePage.propTypes = {
+  profile: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    info: PropTypes.object.isRequired,
+    starring: PropTypes.object.isRequired
+  }).isRequired,
+
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.node,
+    }).isRequired,
+  }).isRequired,
+  
+  fetchProfile: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage)
