@@ -1,20 +1,30 @@
 import { FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_ERROR } from '../actions/types'
 
-export default (state = { loading: true }, action) => {
+const initialState = {
+  loading: true,
+  page: 0,
+  total_results: 0,
+  total_pages: 0,
+  results: []
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
   case FETCH_MOVIES_BEGIN:
-    return {
-      loading: true
-    }
+    return state
 
   case FETCH_MOVIES_SUCCESS:
     return {
       loading: false,
-      ...action.payload
+      page: action.payload.page,
+      total_results: action.payload.total_results,
+      total_pages: action.payload.total_pages,
+      results: [...action.payload.results]
     }
 
   case FETCH_MOVIES_ERROR:
     return {
+      ...state,
       loading: false,
       error: action.payload
     }
