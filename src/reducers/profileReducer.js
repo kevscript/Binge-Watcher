@@ -9,7 +9,10 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
   case FETCH_PROFILE_BEGIN:
-    return state
+    return {
+      ...state,
+      loading: true
+    }
 
   case FETCH_PROFILE_SUCCESS:
     return {

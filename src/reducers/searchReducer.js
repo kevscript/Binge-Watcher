@@ -19,7 +19,10 @@ export default (state = initialState, action) => {
     }
 
   case FETCH_SEARCH_BEGIN:
-    return state
+    return {
+      ...state,
+      loading: true
+    }
 
   case FETCH_SEARCH_SUCCESS:
     return {
