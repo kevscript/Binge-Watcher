@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import MoviesPage from './MoviesPage'
 import MoviePage from './MoviePage'
@@ -87,10 +87,10 @@ const App = () => {
 
       <MainContainer>
         <Switch>
-          <Route exact path='/' render={() => (
+          {/* <Route exact path='/' render={() => (
             <Redirect from='/' to='/movies' />
-          )} />
-          <Route exact path='/movies' component={MoviesPage} />
+          )} /> */}
+          <Route exact path='/' component={MoviesPage} />
           <Route path='/movies/:id' component={(props) => <MoviePage timestamp={new Date().toString()} {...props} />} />
           <Route path='/profile/:id' component={ProfilePage} />
           <Route path='/search/:value' component={(props) => <SearchPage timestamp={new Date().toString()} {...props} />} />

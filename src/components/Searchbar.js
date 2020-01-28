@@ -37,8 +37,10 @@ const Searchbar = ({ search, changeSearchInput }) => {
 
   return (
     <SearchContainer>
-      <SearchInput type='text' onChange={handleSearchInput} value={search.input} />
-      <SearchButton to={`/search/${search.input}`}>Search</SearchButton>
+      <label htmlFor='search'>
+        <SearchInput name='search' type='text' onChange={handleSearchInput} value={search.input} />
+        <SearchButton to={`/search/${search.input}`}>Search</SearchButton>
+      </label>
     </SearchContainer>
   )
 }

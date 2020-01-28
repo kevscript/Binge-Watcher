@@ -85,7 +85,7 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
 
   return (
     <Container>
-      <LogoLink to='/movies'>Binge-Watcher</LogoLink>
+      <LogoLink to='/'>Binge-Watcher</LogoLink>
       <Searchbar />
       <ListContainer>
         <OptionTitle>Sort By</OptionTitle>
@@ -93,8 +93,9 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
           {sortBy && sortBy.map(el => {
             return (
               <ListLink
-                to='/movies'
+                to='/'
                 key={el.query}
+                as='li'
               >
                 <ListItemText
                   selected={el.selected}
@@ -115,8 +116,9 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
           {genres && Object.keys(genres).map(i => {
             return (
               <ListLink
-                to='/movies'
+                to='/'
                 key={genres[i].id}
+                as='li'
               >
                 <ListItemText
                   selected={genres[i].selected}
