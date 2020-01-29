@@ -5,6 +5,7 @@ import MoviesPage from './MoviesPage'
 import MoviePage from './MoviePage'
 import ProfilePage from './ProfilePage'
 import SearchPage from './SearchPage'
+import ErrorPage from './ErrorPage'
 import Sidebar from '../components/Sidebar'
 import Burger from '../components/Burger'
 
@@ -87,13 +88,12 @@ const App = () => {
 
       <MainContainer>
         <Switch>
-          {/* <Route exact path='/' render={() => (
-            <Redirect from='/' to='/movies' />
-          )} /> */}
           <Route exact path='/' component={MoviesPage} />
           <Route path='/movies/:id' component={(props) => <MoviePage timestamp={new Date().toString()} {...props} />} />
           <Route path='/profile/:id' component={ProfilePage} />
           <Route path='/search/:value' component={(props) => <SearchPage timestamp={new Date().toString()} {...props} />} />
+
+          <Route component={ErrorPage} />
         </Switch>
       </MainContainer>
     </Container>

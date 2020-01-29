@@ -95,7 +95,6 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
               <ListLink
                 to='/'
                 key={el.query}
-                as='li'
               >
                 <ListItemText
                   selected={el.selected}
@@ -118,7 +117,6 @@ const Sidebar = ({ fetchGenres, options, selectGenres, selectSort }) => {
               <ListLink
                 to='/'
                 key={genres[i].id}
-                as='li'
               >
                 <ListItemText
                   selected={genres[i].selected}
