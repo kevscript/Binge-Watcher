@@ -22,7 +22,7 @@ const OptionTitle = styled.h3`
   color: ${props => props.theme.colors.primary};
 `
 
-const List = styled.ul`
+const List = styled.div`
   display: flex;
   flex-direction: column;
 `
