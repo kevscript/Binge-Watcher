@@ -9,7 +9,7 @@ const CastContainer = styled.ul`
   flex-wrap: wrap;
   width: 100%;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     justify-content: center;
   }
 `;

@@ -1,20 +1,20 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const BurgerContainer = styled.div`
-  width: 30px;
+  width: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+  gap: 3px;
+`;
 
 const BurgerLine = styled.div`
   width: 100%;
   height: 3px;
-  background: ${props => props.theme.colors.primary};
-  margin: 3px 0;
-`
+  background: ${(props) => props.theme.colors.primary};
+`;
 
 const Burger = () => {
   return (
@@ -23,9 +23,7 @@ const Burger = () => {
       <BurgerLine />
       <BurgerLine />
     </BurgerContainer>
-  )
-}
+  );
+};
 
-export default Burger
-
-
+export default Burger;

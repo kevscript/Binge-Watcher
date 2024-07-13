@@ -10,15 +10,19 @@ import PropTypes from "prop-types";
 const ProfilePageContainer = styled.div`
   width: 90%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 `;
 
 const ProfileInfoContainer = styled.div`
-  margin: 50px 0;
   display: flex;
   align-items: start;
+  gap: 3rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
+    gap: 1rem;
   }
 `;
 
@@ -27,15 +31,19 @@ const Title = styled.h3`
   text-transform: uppercase;
   line-height: 3;
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     text-align: center;
   }
 `;
 
 const ProfileImgContainer = styled.div`
-  max-width: 182px;
+  width: 182px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: red;
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     margin: 0 auto;
   }
 `;
@@ -49,15 +57,14 @@ const ProfileImg = styled.img`
 const BioText = styled.p`
   margin-top: 20px;
   max-width: 65ch;
+  line-height: 1.5;
 `;
 
 const ProfileInfo = styled.div`
-  margin-left: 50px;
-
-  @media (max-width: 600px) {
-    margin-left: 0;
+  @media (max-width: 768px) {
     aling-items: center;
     text-align: center;
+    margin: 0 auto;
   }
 `;
 

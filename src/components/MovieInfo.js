@@ -8,9 +8,9 @@ import PropTypes from "prop-types";
 const MovieInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 50px 0;
+  gap: 2rem;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
@@ -18,37 +18,34 @@ const MovieInfoContainer = styled.div`
 const PosterContainer = styled.div`
   overflow: hidden;
 
-  @media (max-width: 700px) {
+  @media (max-width: 1024px) {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
     width: 50%;
+  }
+
+  @media (max-width: 768px) {
     margin: 0 auto;
   }
 `;
 
 const PosterImg = styled.img`
   display: block;
-  border-radius: 15px;
+  border-radius: 1rem;
   width: 100%;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 50px;
-
-  @media (max-width: 700px) {
-    margin-left: 0;
-    margin-top: 20px;
-  }
 `;
 
 const Title = styled.h1`
   font-size: 36px;
   line-height: 1;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     text-align: center;
   }
 `;
@@ -58,7 +55,7 @@ const Text = styled.p`
   max-width: 65ch;
   margin: 20px 0;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     text-align: center;
     margin: 20px auto;
   }
@@ -69,7 +66,7 @@ const Option = styled.h3`
   text-transform: uppercase;
   margin: 5px 0;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     text-align: center;
     margin: 25px 0 15px;
   }
@@ -79,7 +76,7 @@ const SubTitle = styled.h3`
   color: ${(props) => props.theme.colors.text};
   margin: 10px 0;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     text-align: center;
   }
 `;
@@ -88,7 +85,7 @@ const GenresList = styled.ul`
   display: flex;
   flex-wrap: wrap;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     justify-content: center;
   }
 `;
@@ -103,7 +100,11 @@ const GenresItem = styled.li`
 `;
 
 const CastContainer = styled.div`
-  max-width: 550px;
+  max-width: 32rem;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `;
 
 const Brake = styled.div`
@@ -115,7 +116,7 @@ const TrailerButtonContainer = styled.div`
   display: flex;
   width: 100%;
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     justify-content: center;
   }
 `;

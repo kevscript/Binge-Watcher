@@ -15,8 +15,9 @@ const MoviesListContainer = styled.div`
 const MoviesListItem = styled.div`
   position: relative;
   cursor: pointer;
+  overflow: hidden;
   width: 250px;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin: 25px 10px;
   transition: all 0.3s;
 
@@ -25,7 +26,7 @@ const MoviesListItem = styled.div`
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     width: 200px;
     transition: all 0.3s;
   }
@@ -42,7 +43,7 @@ const MoviePosterContainer = styled.div`
   overflow: hidden;
   border-radius: 10px 10px 0 0;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     height: calc(100% - 80px);
   }
 `;
@@ -61,8 +62,9 @@ const MovieSubContainer = styled.div`
   align-items: center;
   height: 100px;
   gap: 0.5rem;
+  background-color: rgb(255, 255, 255);
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     height: 80px;
   }
 `;
@@ -72,7 +74,7 @@ const MovieSubTitle = styled.span`
   font-size: 16px;
   text-align: center;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     font-size: 14px;
   }
 `;
